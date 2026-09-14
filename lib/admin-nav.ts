@@ -18,6 +18,7 @@ import {
   Bell,
   BarChart3,
   Settings,
+  ShieldCheck,
 } from 'lucide-react'
 
 export interface AdminNavItem {
@@ -51,6 +52,7 @@ export const adminNav: AdminNavGroup[] = [
       { href: '/admin/commandes', label: 'Commandes', icon: ShoppingBag },
       { href: '/admin/rendez-vous', label: 'Réservations', icon: CalendarClock },
       { href: '/admin/promotions', label: 'Promotions', icon: Tag },
+      { href: '/admin/certificats', label: 'Certificats', icon: ShieldCheck },
     ],
   },
   {

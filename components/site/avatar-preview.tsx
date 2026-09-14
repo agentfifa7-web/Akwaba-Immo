@@ -7,10 +7,11 @@ import { cn } from '@/lib/utils'
  * Deux modes :
  * - "photo" : la propre photo tête-aux-pieds de l'utilisateur, avec des
  *   superpositions de couleur en fondu (maquillage, coiffure, tenue).
- * - "mannequin" (par défaut) : une silhouette illustrée entière, dessinée
- *   directement à partir de la teinte choisie dans la palette KÔSMÉA — donc
- *   toujours fidèlement représentative, sans dépendre d'une photo tierce
- *   dont nous ne maîtrisons pas le contenu.
+ * - "mannequin" (par défaut) : une silhouette illustrée entière, façon
+ *   croquis de mode (proportions soignées : encolure, taille, hanches,
+ *   bras et jambes distincts), dessinée directement à partir de la teinte
+ *   choisie dans la palette KÔSMÉA — donc toujours fidèlement représentative,
+ *   sans dépendre d'une photo tierce dont nous ne maîtrisons pas le contenu.
  *
  * Dans les deux cas, c'est un rendu indicatif : la couleur donne une idée
  * fidèle du choix effectué, ce n'est jamais présenté comme une
@@ -35,88 +36,150 @@ export function AvatarPreview({ config, className }: { config: AvatarConfig; cla
 
   const longHair = /longue/i.test(config.hairLength) && !/mi-/i.test(config.hairLength)
   const midHair = /mi-longue/i.test(config.hairLength)
-  const hipWidth = /généreuse/i.test(config.bodyType) ? 96 : /athlétique/i.test(config.bodyType) ? 78 : /fine/i.test(config.bodyType) ? 74 : 84
+  const shortHair = !longHair && !midHair
+
+  const sizesByBody: Record<string, { bust: number; waist: number; hip: number }> = {
+    généreuse: { bust: 33, waist: 29, hip: 39 },
+    athlétique: { bust: 25, waist: 19, hip: 27 },
+    fine: { bust: 23, waist: 17, hip: 25 },
+    moyenne: { bust: 28, waist: 22, hip: 32 },
+  }
+  const bodyKey = /généreuse/i.test(config.bodyType)
+    ? 'généreuse'
+    : /athlétique/i.test(config.bodyType)
+      ? 'athlétique'
+      : /fine/i.test(config.bodyType)
+        ? 'fine'
+        : 'moyenne'
+  const { bust, waist, hip } = sizesByBody[bodyKey]
+
+  const cx = 120
+  const shoulderY = 128
+  const bustY = 156
+  const waistY = 196
+  const hipY = 226
+  const hemY = 276
+  const kneeY = 322
+  const ankleY = 372
+  const footY = 388
+  const shoulderW = bust * 0.98
 
   return (
     <div className={cn('relative overflow-hidden rounded-2xl bg-gradient-to-b from-secondary to-card', className)}>
-      <svg viewBox="0 0 240 340" className="h-full w-full">
+      <svg viewBox="0 0 240 400" className="h-full w-full">
         {/* Ombre au sol */}
-        <ellipse cx="120" cy="328" rx="52" ry="7" fill="#000000" opacity="0.08" />
+        <ellipse cx={cx} cy={footY - 2} rx="36" ry="6" fill="#000000" opacity="0.1" />
 
-        {/* Cheveux — couche arrière (longs) */}
+        {/* Cheveux — couche arrière (longs / mi-longs) */}
         {longHair && (
-          <path d="M88 78 Q78 160 92 230 L104 230 Q94 150 98 82 Z" fill={config.hairColor} />
+          <>
+            <path
+              d={`M${cx - 24} 58 Q${cx - 40} 140 ${cx - 30} 236 Q${cx - 27} 246 ${cx - 20} 244 Q${cx - 27} 150 ${cx - 14} 62 Z`}
+              fill={config.hairColor}
+            />
+            <path
+              d={`M${cx + 24} 58 Q${cx + 40} 140 ${cx + 30} 236 Q${cx + 27} 246 ${cx + 20} 244 Q${cx + 27} 150 ${cx + 14} 62 Z`}
+              fill={config.hairColor}
+            />
+          </>
         )}
-        {longHair && (
-          <path d="M152 78 Q162 160 148 230 L136 230 Q146 150 142 82 Z" fill={config.hairColor} />
+        {midHair && (
+          <>
+            <path
+              d={`M${cx - 24} 58 Q${cx - 36} 108 ${cx - 28} 168 Q${cx - 25} 176 ${cx - 18} 174 Q${cx - 24} 116 ${cx - 13} 62 Z`}
+              fill={config.hairColor}
+            />
+            <path
+              d={`M${cx + 24} 58 Q${cx + 36} 108 ${cx + 28} 168 Q${cx + 25} 176 ${cx + 18} 174 Q${cx + 24} 116 ${cx + 13} 62 Z`}
+              fill={config.hairColor}
+            />
+          </>
         )}
 
         {/* Jambes */}
-        <path d="M100 216 Q96 260 98 318 L112 318 Q112 260 114 216 Z" fill={config.skinTone} />
-        <path d="M140 216 Q144 260 142 318 L128 318 Q128 260 126 216 Z" fill={config.skinTone} />
+        <path
+          d={`M${cx - hip * 0.42} ${hemY - 4} Q${cx - hip * 0.4} ${(hemY + kneeY) / 2} ${cx - 11} ${kneeY} Q${cx - 10} ${(kneeY + ankleY) / 2} ${cx - 9} ${ankleY} L${cx - 2} ${ankleY} Q${cx - 3} ${(kneeY + ankleY) / 2} ${cx - 4} ${kneeY} Q${cx - 6} ${(hemY + kneeY) / 2} ${cx - 4} ${hemY - 4} Z`}
+          fill={config.skinTone}
+        />
+        <path
+          d={`M${cx + hip * 0.42} ${hemY - 4} Q${cx + hip * 0.4} ${(hemY + kneeY) / 2} ${cx + 11} ${kneeY} Q${cx + 10} ${(kneeY + ankleY) / 2} ${cx + 9} ${ankleY} L${cx + 2} ${ankleY} Q${cx + 3} ${(kneeY + ankleY) / 2} ${cx + 4} ${kneeY} Q${cx + 6} ${(hemY + kneeY) / 2} ${cx + 4} ${hemY - 4} Z`}
+          fill={config.skinTone}
+        />
 
         {/* Chaussures */}
-        <ellipse cx="105" cy="322" rx="15" ry="7" fill="#171310" />
-        <ellipse cx="135" cy="322" rx="15" ry="7" fill="#171310" />
+        <path d={`M${cx - 11} ${ankleY} L${cx - 2} ${ankleY} L${cx - 2} ${footY} L${cx - 23} ${footY} Q${cx - 23} ${footY - 6} ${cx - 11} ${ankleY + 2} Z`} fill="#171310" />
+        <path d={`M${cx + 11} ${ankleY} L${cx + 2} ${ankleY} L${cx + 2} ${footY} L${cx + 23} ${footY} Q${cx + 23} ${footY - 6} ${cx + 11} ${ankleY + 2} Z`} fill="#171310" />
 
         {/* Bras */}
-        <path d="M76 140 Q64 175 70 210 Q72 216 80 214 Q76 178 88 145 Z" fill={config.skinTone} />
-        <path d="M164 140 Q176 175 170 210 Q168 216 160 214 Q164 178 152 145 Z" fill={config.skinTone} />
-
-        {/* Tenue (silhouette robe/ensemble) */}
         <path
-          d={`M${120 - hipWidth * 0.42} 138 Q${120 - hipWidth * 0.5} 175 ${120 - hipWidth * 0.5} 216 Q120 226 ${120 + hipWidth * 0.5} 216 Q${120 + hipWidth * 0.5} 175 ${120 + hipWidth * 0.42} 138 Q120 148 ${120 - hipWidth * 0.42} 138 Z`}
+          d={`M${cx - shoulderW * 0.92} ${shoulderY + 6} Q${cx - shoulderW * 1.18} ${shoulderY + 55} ${cx - shoulderW * 1.05} ${shoulderY + 108} Q${cx - shoulderW * 1.0} ${shoulderY + 132} ${cx - shoulderW * 0.82} ${shoulderY + 130} Q${cx - shoulderW * 0.92} ${shoulderY + 100} ${cx - shoulderW * 0.78} ${shoulderY + 52} Q${cx - shoulderW * 0.72} ${shoulderY + 20} ${cx - shoulderW * 0.6} ${shoulderY + 4} Z`}
+          fill={config.skinTone}
+        />
+        <path
+          d={`M${cx + shoulderW * 0.92} ${shoulderY + 6} Q${cx + shoulderW * 1.18} ${shoulderY + 55} ${cx + shoulderW * 1.05} ${shoulderY + 108} Q${cx + shoulderW * 1.0} ${shoulderY + 132} ${cx + shoulderW * 0.82} ${shoulderY + 130} Q${cx + shoulderW * 0.92} ${shoulderY + 100} ${cx + shoulderW * 0.78} ${shoulderY + 52} Q${cx + shoulderW * 0.72} ${shoulderY + 20} ${cx + shoulderW * 0.6} ${shoulderY + 4} Z`}
+          fill={config.skinTone}
+        />
+        <ellipse cx={cx - shoulderW * 0.87} cy={shoulderY + 134} rx="6" ry="8" fill={config.skinTone} />
+        <ellipse cx={cx + shoulderW * 0.87} cy={shoulderY + 134} rx="6" ry="8" fill={config.skinTone} />
+
+        {/* Cou */}
+        <path d={`M${cx - 8} 96 L${cx + 8} 96 L${cx + 10} 132 L${cx - 10} 132 Z`} fill={config.skinTone} />
+
+        {/* Buste / tenue (silhouette avec encolure) */}
+        <path
+          d={`M${cx - 9} 108 Q${cx - shoulderW * 0.6} 112 ${cx - shoulderW * 0.95} ${shoulderY} Q${cx - bust * 1.02} ${bustY} ${cx - waist * 0.85} ${waistY} Q${cx - hip * 1.05} ${hipY} ${cx - hip * 0.92} ${hemY} Q${cx} ${hemY + 9} ${cx + hip * 0.92} ${hemY} Q${cx + hip * 1.05} ${hipY} ${cx + waist * 0.85} ${waistY} Q${cx + bust * 1.02} ${bustY} ${cx + shoulderW * 0.95} ${shoulderY} Q${cx + shoulderW * 0.6} 112 ${cx + 9} 108 Q${cx} 116 ${cx - 9} 108 Z`}
           fill={config.outfitColor}
         />
 
-        {/* Cou */}
-        <rect x="108" y="106" width="24" height="26" rx="6" fill={config.skinTone} />
-
-        {/* Cheveux — couche arrière (mi-longs) */}
-        {midHair && <path d="M92 80 Q84 130 94 168 L106 168 Q98 128 100 84 Z" fill={config.hairColor} />}
-        {midHair && <path d="M148 80 Q156 130 146 168 L134 168 Q142 128 140 84 Z" fill={config.hairColor} />}
-
         {/* Visage */}
-        <ellipse cx="120" cy="76" rx="38" ry="42" fill={config.skinTone} />
+        <ellipse cx={cx} cy="70" rx="25" ry="29" fill={config.skinTone} />
+        <ellipse cx={cx - 25} cy="72" rx="3.6" ry="6.5" fill={config.skinTone} />
+        <ellipse cx={cx + 25} cy="72" rx="3.6" ry="6.5" fill={config.skinTone} />
 
-        {/* Fard à paupières */}
-        <path d="M96 68 Q108 60 118 66" stroke={config.eyeshadowShade} strokeWidth="7" fill="none" strokeLinecap="round" opacity="0.75" />
-        <path d="M122 66 Q132 60 144 68" stroke={config.eyeshadowShade} strokeWidth="7" fill="none" strokeLinecap="round" opacity="0.75" />
+        {/* Cheveux — calotte avant */}
+        <path d={`M${cx - 26} 52 A 27 30 0 0 1 ${cx + 26} 52 Q${cx + 14} 42 ${cx} 44 Q${cx - 14} 42 ${cx - 26} 52 Z`} fill={config.hairColor} />
+        {shortHair && (
+          <path
+            d={`M${cx - 26} 50 A 27 28 0 0 1 ${cx + 26} 50 L${cx + 24} 70 Q${cx + 16} 56 ${cx} 58 Q${cx - 16} 56 ${cx - 24} 70 Z`}
+            fill={config.hairColor}
+          />
+        )}
 
         {/* Sourcils */}
-        <path d="M97 58 Q108 52 119 57" stroke={config.hairColor} strokeWidth="2.5" fill="none" strokeLinecap="round" />
-        <path d="M121 57 Q132 52 143 58" stroke={config.hairColor} strokeWidth="2.5" fill="none" strokeLinecap="round" />
+        <path d={`M${cx - 19} 60 Q${cx - 11} 56 ${cx - 4} 59.5`} stroke={config.hairColor} strokeWidth="1.8" fill="none" strokeLinecap="round" />
+        <path d={`M${cx + 4} 59.5 Q${cx + 11} 56 ${cx + 19} 60`} stroke={config.hairColor} strokeWidth="1.8" fill="none" strokeLinecap="round" />
+
+        {/* Fard à paupières */}
+        <ellipse cx={cx - 11} cy="65" rx="7.5" ry="3.6" fill={config.eyeshadowShade} opacity="0.65" />
+        <ellipse cx={cx + 11} cy="65" rx="7.5" ry="3.6" fill={config.eyeshadowShade} opacity="0.65" />
 
         {/* Yeux */}
-        <ellipse cx="107" cy="74" rx="4.5" ry="3.2" fill="#171310" />
-        <ellipse cx="133" cy="74" rx="4.5" ry="3.2" fill="#171310" />
+        <path d={`M${cx - 18} 68.5 Q${cx - 11} 65 ${cx - 4} 68.5 Q${cx - 11} 71.5 ${cx - 18} 68.5 Z`} fill="#fff" />
+        <path d={`M${cx + 4} 68.5 Q${cx + 11} 65 ${cx + 18} 68.5 Q${cx + 11} 71.5 ${cx + 4} 68.5 Z`} fill="#fff" />
+        <circle cx={cx - 10} cy="68.5" r="2.5" fill="#171310" />
+        <circle cx={cx + 10} cy="68.5" r="2.5" fill="#171310" />
+        {config.eyeliner && (
+          <>
+            <path d={`M${cx - 18} 68.5 Q${cx - 11} 64.6 ${cx - 4} 68.5`} stroke="#171310" strokeWidth="1.1" fill="none" />
+            <path d={`M${cx + 4} 68.5 Q${cx + 11} 64.6 ${cx + 18} 68.5`} stroke="#171310" strokeWidth="1.1" fill="none" />
+          </>
+        )}
+        {config.mascara && (
+          <>
+            <path d={`M${cx - 18} 68 l-2 -1.4`} stroke="#171310" strokeWidth="0.9" strokeLinecap="round" />
+            <path d={`M${cx + 18} 68 l2 -1.4`} stroke="#171310" strokeWidth="0.9" strokeLinecap="round" />
+          </>
+        )}
 
-        {/* Cils */}
-        {config.mascara && <path d="M102 71 l-2.5 -2M107 70 l0 -3M113 71 l2.5 -2" stroke="#171310" strokeWidth="1.2" strokeLinecap="round" />}
-        {config.mascara && <path d="M127 71 l-2.5 -2M133 70 l0 -3M139 71 l2.5 -2" stroke="#171310" strokeWidth="1.2" strokeLinecap="round" />}
-
-        {/* Eyeliner */}
-        {config.eyeliner && <path d="M102 75 Q107 71 112 75" stroke="#171310" strokeWidth="1.4" fill="none" />}
-        {config.eyeliner && <path d="M128 75 Q133 71 138 75" stroke="#171310" strokeWidth="1.4" fill="none" />}
+        {/* Nez */}
+        <path d={`M${cx - 1.8} 71 Q${cx - 3} 79 ${cx} 81.5 Q${cx + 3} 79 ${cx + 1.8} 71`} stroke="rgba(0,0,0,0.16)" strokeWidth="1.1" fill="none" strokeLinecap="round" />
 
         {/* Blush */}
-        <ellipse cx="98" cy="88" rx="9" ry="6" fill={config.blushShade} opacity="0.5" />
-        <ellipse cx="142" cy="88" rx="9" ry="6" fill={config.blushShade} opacity="0.5" />
+        <ellipse cx={cx - 15.5} cy="80" rx="6" ry="4" fill={config.blushShade} opacity="0.4" />
+        <ellipse cx={cx + 15.5} cy="80" rx="6" ry="4" fill={config.blushShade} opacity="0.4" />
 
         {/* Lèvres */}
-        <path d="M108 104 Q120 112 132 104 Q120 110 108 104 Z" fill={config.lipstickShade} />
-
-        {/* Cheveux — couche avant (toutes longueurs) */}
-        <path
-          d={
-            longHair
-              ? 'M80 76 Q76 32 120 24 Q164 32 160 76 Q158 50 120 46 Q82 50 80 76 Z'
-              : midHair
-                ? 'M82 78 Q78 34 120 26 Q162 34 158 78 Q156 52 120 48 Q84 52 82 78 Z'
-                : 'M78 82 Q70 30 120 22 Q170 30 162 82 Q166 56 120 44 Q74 56 78 82 Z'
-          }
-          fill={config.hairColor}
-        />
+        <path d={`M${cx - 8} 92.5 Q${cx} 90 ${cx + 8} 92.5 Q${cx} 98 ${cx - 8} 92.5 Z`} fill={config.lipstickShade} />
       </svg>
 
       <p className="absolute bottom-3 left-1/2 -translate-x-1/2 rounded-full bg-obsidian/80 px-3 py-1 text-[9px] font-semibold uppercase tracking-wider text-white">
