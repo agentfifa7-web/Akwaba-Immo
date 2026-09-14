@@ -3,11 +3,12 @@
 import { useEffect, useMemo, useState } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
-import { Save, UserSearch } from 'lucide-react'
+import { Save, Sparkles, UserSearch } from 'lucide-react'
 
 import { formatFCFA, products } from '@/lib/data'
 import { categoryProductKeywords, findGarments } from '@/lib/garments'
-import { useCreations, useCustomRequests } from '@/lib/store'
+import { useAvatar, useCreations, useCustomRequests } from '@/lib/store'
+import { AvatarPreview } from '@/components/site/avatar-preview'
 import { SectionHeading } from '@/components/site/section-heading'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
@@ -45,8 +46,10 @@ export default function FashionDesignerPage() {
   const [choices, setChoices] = useState<Choices>(initialChoices)
   const { add: addCreation } = useCreations()
   const { add: addRequest } = useCustomRequests()
+  const { config: avatarConfig } = useAvatar()
   const router = useRouter()
   const [saved, setSaved] = useState(false)
+  const [showOnAvatar, setShowOnAvatar] = useState(false)
 
   const candidates = useMemo(() => findGarments(choices.categorie, choices.coupe), [choices.categorie, choices.coupe])
   const [selectedGarmentId, setSelectedGarmentId] = useState(candidates[0]?.id)
@@ -111,26 +114,39 @@ export default function FashionDesignerPage() {
         </div>
 
         <div className="lg:sticky lg:top-24 lg:self-start">
-          {garment && (
+          {showOnAvatar ? (
             <>
-              <div className="relative aspect-[3/4] overflow-hidden rounded-2xl bg-secondary">
-                <img src={garment.photo} alt={garment.label} className="absolute inset-0 h-full w-full object-cover" />
-                <div
-                  className="absolute inset-0 mix-blend-multiply"
-                  style={{ backgroundColor: colorNameToHex(choices.couleur), opacity: 0.4 }}
-                />
-                <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-obsidian/85 via-obsidian/10 to-transparent p-4">
-                  <p className="font-serif text-lg text-white">{choices.categorie} {choices.coupe}</p>
-                  <p className="text-xs uppercase tracking-wider text-white/70">{choices.tissu} · {choices.motif}</p>
-                </div>
-              </div>
+              <AvatarPreview config={{ ...avatarConfig, outfitColor: colorNameToHex(choices.couleur) }} className="aspect-[3/4] w-full" />
               <p className="mt-2 text-center text-[10px] uppercase tracking-wider text-muted-foreground">
-                {garment.label} — teinte {choices.couleur} appliquée · rendu indicatif
+                {choices.categorie} {choices.tissu} {choices.couleur} sur votre mannequin — rendu indicatif
               </p>
             </>
+          ) : (
+            garment && (
+              <>
+                <div className="relative aspect-[3/4] overflow-hidden rounded-2xl bg-secondary">
+                  <img src={garment.photo} alt={garment.label} className="absolute inset-0 h-full w-full object-cover" />
+                  <div
+                    className="absolute inset-0 mix-blend-multiply"
+                    style={{ backgroundColor: colorNameToHex(choices.couleur), opacity: 0.4 }}
+                  />
+                  <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-obsidian/85 via-obsidian/10 to-transparent p-4">
+                    <p className="font-serif text-lg text-white">{choices.categorie} {choices.coupe}</p>
+                    <p className="text-xs uppercase tracking-wider text-white/70">{choices.tissu} · {choices.motif}</p>
+                  </div>
+                </div>
+                <p className="mt-2 text-center text-[10px] uppercase tracking-wider text-muted-foreground">
+                  {garment.label} — teinte {choices.couleur} appliquée · rendu indicatif
+                </p>
+              </>
+            )
           )}
 
-          {candidates.length > 1 && (
+          <Button variant="outline" className="mt-3 w-full gap-2" onClick={() => setShowOnAvatar((v) => !v)}>
+            <Sparkles className="size-4" /> {showOnAvatar ? 'Voir le modèle' : 'Essayer sur mon mannequin'}
+          </Button>
+
+          {!showOnAvatar && candidates.length > 1 && (
             <div className="mt-3 grid grid-cols-3 gap-2">
               {candidates.map((c) => (
                 <button

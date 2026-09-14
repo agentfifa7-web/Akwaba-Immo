@@ -3,12 +3,13 @@
 import { use, useState } from 'react'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
-import { Heart, Share2, Sparkles, Star, Truck, RotateCcw, ShieldCheck } from 'lucide-react'
+import { Heart, Share2, Star, Truck, RotateCcw, ShieldCheck } from 'lucide-react'
 
 import { formatFCFA, getBoutique, getProductBySlug, looks, similarProducts } from '@/lib/data'
 import { useCart, useFavorites } from '@/lib/store'
 import { ProductCard } from '@/components/site/product-card'
 import { LookCard } from '@/components/site/look-card'
+import { TryOnButton } from '@/components/site/try-on-panel'
 import { SectionHeading } from '@/components/site/section-heading'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
@@ -149,11 +150,7 @@ export default function ProductPage({ params }: { params: Promise<{ slug: string
             <Link href={`/panier`} onClick={handleAdd} className="flex-1">
               <Button size="lg" variant="secondary" className="w-full">Acheter maintenant</Button>
             </Link>
-            <Link href={`/essayer?produit=${product.slug}`} className="flex-1">
-              <Button size="lg" variant="outline" className="w-full gap-2">
-                <Sparkles className="size-4" /> Essayer virtuellement
-              </Button>
-            </Link>
+            <TryOnButton product={product} className="w-full flex-1" />
           </div>
 
           <div className="mt-8 grid gap-3 border-t border-border pt-6 text-sm text-muted-foreground sm:grid-cols-3">

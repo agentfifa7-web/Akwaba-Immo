@@ -1,12 +1,13 @@
 'use client'
 
 import Link from 'next/link'
-import { Heart, Sparkles, Star } from 'lucide-react'
+import { Heart, Star } from 'lucide-react'
 
 import type { Product } from '@/lib/data'
 import { formatFCFA } from '@/lib/data'
 import { useCart, useFavorites } from '@/lib/store'
 import { Badge } from '@/components/ui/badge'
+import { TryOnButton } from '@/components/site/try-on-panel'
 import { cn } from '@/lib/utils'
 
 const badgeVariant: Record<string, 'default' | 'graphite' | 'outline' | 'muted' | 'white'> = {
@@ -63,13 +64,7 @@ export function ProductCard({ product, className }: { product: Product; classNam
           >
             Ajouter
           </button>
-          <Link
-            href={`/essayer?produit=${product.slug}`}
-            onClick={(e) => e.stopPropagation()}
-            className="flex flex-1 items-center justify-center gap-1 rounded-lg bg-white/95 px-3 py-2.5 text-[10px] font-semibold uppercase tracking-wider text-foreground backdrop-blur"
-          >
-            <Sparkles className="size-3" /> Essayer
-          </Link>
+          <TryOnButton product={product} compact className="flex-1" />
         </div>
       </Link>
       <div className="py-4">

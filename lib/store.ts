@@ -141,8 +141,13 @@ export function useFavorites() {
 
 // ---- Mon Avatar (Try-On) -----------------------------------------------------
 
+export type PhotoMode = 'mannequin' | 'photo'
+
 export interface AvatarConfig {
+  photoMode: PhotoMode
   mannequinId: string
+  customPhoto?: string
+  skinToneId: string
   skinTone: string
   faceShape: string
   hairstyle: string
@@ -158,10 +163,14 @@ export interface AvatarConfig {
   bodyType: string
   height: string
   clothingSize: string
+  validated: boolean
 }
 
 export const defaultAvatar: AvatarConfig = {
+  photoMode: 'mannequin',
   mannequinId: 'mq-1',
+  customPhoto: undefined,
+  skinToneId: 'st-5',
   skinTone: '#B97A46',
   faceShape: 'Ovale',
   hairstyle: 'Lace wig lisse',
@@ -177,6 +186,7 @@ export const defaultAvatar: AvatarConfig = {
   bodyType: 'Silhouette moyenne',
   height: '1,65 m',
   clothingSize: 'M',
+  validated: false,
 }
 
 export function useAvatar() {
