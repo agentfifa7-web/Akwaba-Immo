@@ -158,7 +158,7 @@ export default function NosMetiersPage() {
             <div className="mx-auto max-w-7xl px-5 py-20 lg:px-10 lg:py-24">
               <div className={`grid items-center gap-12 lg:grid-cols-2 lg:gap-16 ${reverse ? 'lg:[&>*:first-child]:order-2' : ''}`}>
                 <Reveal>
-                  <div className="aspect-[4/3] overflow-hidden bg-muted">
+                  <div className="aspect-[4/3] overflow-hidden rounded-xl bg-muted">
                     <img src={detail.image} alt={metier.title} className="h-full w-full object-cover" />
                   </div>
                 </Reveal>

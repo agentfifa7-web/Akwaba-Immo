@@ -65,7 +65,7 @@ export default function AppointmentPage() {
       {context && (
         <div className="mt-8 flex items-center gap-4 border border-border bg-secondary/50 p-5">
           {'images' in context && (
-            <img src={context.images[0]} alt={contextTitle} className="size-20 shrink-0 object-cover" />
+            <img src={context.images[0]} alt={contextTitle} className="size-20 shrink-0 rounded-lg object-cover" />
           )}
           <div>
             <h2 className="font-serif text-lg leading-snug">{contextTitle}</h2>

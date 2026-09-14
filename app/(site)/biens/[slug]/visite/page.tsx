@@ -63,7 +63,7 @@ export default function VirtualTourPage() {
       <div className="mx-auto max-w-6xl px-5 py-8 lg:px-10 lg:py-12">
         {mode === 'photos' && (
           <div>
-            <div className="relative aspect-[16/9] overflow-hidden bg-black">
+            <div className="relative aspect-[16/9] overflow-hidden rounded-xl bg-black">
               <img src={images[activeImage]} alt={property.title} className="h-full w-full object-contain" />
               {images.length > 1 && (
                 <>
@@ -93,7 +93,7 @@ export default function VirtualTourPage() {
                   <button
                     key={img + i}
                     onClick={() => setActiveImage(i)}
-                    className={`aspect-[4/3] overflow-hidden border-2 transition-colors ${i === activeImage ? 'border-primary' : 'border-transparent opacity-60 hover:opacity-100'}`}
+                    className={`aspect-[4/3] overflow-hidden rounded-lg border-2 transition-colors ${i === activeImage ? 'border-primary' : 'border-transparent opacity-60 hover:opacity-100'}`}
                   >
                     <img src={img} alt="" className="h-full w-full object-cover" />
                   </button>

@@ -83,7 +83,7 @@ export default function EngagementsPage() {
             return (
               <div key={e.title} className={`grid items-center gap-10 lg:grid-cols-2 lg:gap-16 ${reverse ? 'lg:[&>*:first-child]:order-2' : ''}`}>
                 <Reveal>
-                  <div className="aspect-[16/10] overflow-hidden bg-muted">
+                  <div className="aspect-[16/10] overflow-hidden rounded-xl bg-muted">
                     <img src={e.image} alt={e.title} className="h-full w-full object-cover" />
                   </div>
                 </Reveal>

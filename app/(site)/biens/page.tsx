@@ -242,7 +242,7 @@ function BiensContent() {
           <div className="mt-10 flex flex-col divide-y divide-border border-t border-border">
             {filtered.map((property) => (
               <Link key={property.id} href={`/biens/${property.slug}`} className="group flex flex-col gap-5 py-6 sm:flex-row">
-                <div className="relative aspect-[4/3] w-full shrink-0 overflow-hidden bg-muted sm:w-64">
+                <div className="relative aspect-[4/3] w-full shrink-0 overflow-hidden rounded-xl bg-muted sm:w-64">
                   <img src={property.images[0]} alt={property.title} className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105" />
                 </div>
                 <div className="flex flex-1 flex-col justify-between">

@@ -30,11 +30,11 @@ export default function AvancementPage() {
       <section className="mx-auto max-w-7xl px-5 py-14 lg:px-10 lg:py-20">
         <div className="flex flex-col gap-16">
           {tracked.map((project) => (
-            <div key={project.id} className="border border-border bg-card">
+            <div key={project.id} className="overflow-hidden rounded-xl border border-border bg-card">
               <div className="grid gap-0 lg:grid-cols-[1fr_1.3fr]">
                 <div className="grid grid-cols-2 gap-1 p-1">
                   {project.images.slice(0, 4).map((img, i) => (
-                    <div key={img + i} className={`overflow-hidden bg-muted ${project.images.length === 1 ? 'col-span-2 aspect-[16/9]' : 'aspect-square'}`}>
+                    <div key={img + i} className={`overflow-hidden rounded-lg bg-muted ${project.images.length === 1 ? 'col-span-2 aspect-[16/9]' : 'aspect-square'}`}>
                       <img src={img} alt={`Chantier ${project.name}`} className="h-full w-full object-cover" />
                     </div>
                   ))}

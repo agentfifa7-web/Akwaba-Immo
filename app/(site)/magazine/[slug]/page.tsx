@@ -82,7 +82,7 @@ export default function ArticlePage() {
             <div className="mt-10 grid gap-x-6 gap-y-10 md:grid-cols-3">
               {related.map((a) => (
                 <Link key={a.id} href={`/magazine/${a.slug}`} className="group block">
-                  <div className="aspect-[4/3] overflow-hidden bg-muted">
+                  <div className="aspect-[4/3] overflow-hidden rounded-xl bg-muted">
                     <img src={a.image} alt={a.title} className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105" />
                   </div>
                   <div className="py-5">

@@ -59,7 +59,7 @@ export default function PropertyContactPage() {
       </p>
 
       <div className="mt-8 flex items-center gap-4 border border-border bg-secondary/50 p-5">
-        <img src={property.images[0]} alt={property.title} className="size-20 shrink-0 object-cover" />
+        <img src={property.images[0]} alt={property.title} className="size-20 shrink-0 rounded-lg object-cover" />
         <div>
           <h2 className="font-serif text-lg leading-snug">{property.title}</h2>
           <p className="mt-1 flex items-center gap-1.5 text-xs text-muted-foreground">

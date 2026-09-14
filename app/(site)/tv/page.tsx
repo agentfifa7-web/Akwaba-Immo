@@ -70,7 +70,7 @@ export default function TvPage() {
           {filtered.map((video, i) => (
             <Reveal key={video.id} delay={(i % 6) * 60}>
               <Link href={`/tv/${video.slug}`} className="group block">
-                <div className="relative aspect-video overflow-hidden bg-muted">
+                <div className="relative aspect-video overflow-hidden rounded-xl bg-muted">
                   <img src={video.thumbnail} alt={video.title} className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105" />
                   <div className="absolute inset-0 flex items-center justify-center bg-graphite/20 transition-colors group-hover:bg-graphite/35">
                     <span className="flex size-14 items-center justify-center rounded-full bg-white/90 text-graphite transition-transform group-hover:scale-110">

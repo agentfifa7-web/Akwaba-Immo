@@ -83,8 +83,8 @@ export default function AProposPage() {
           </Reveal>
           <Reveal delay={100}>
             <div className="grid grid-cols-2 gap-4">
-              <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=900&q=85" alt="Programme immobilier Akwaba" className="aspect-[3/4] w-full object-cover" />
-              <img src="https://images.unsplash.com/photo-1521791136064-7986c2920216?auto=format&fit=crop&w=900&q=85" alt="Équipe Akwaba Immobilier" className="mt-8 aspect-[3/4] w-full object-cover" />
+              <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=900&q=85" alt="Programme immobilier Akwaba" className="aspect-[3/4] w-full rounded-xl object-cover" />
+              <img src="https://images.unsplash.com/photo-1521791136064-7986c2920216?auto=format&fit=crop&w=900&q=85" alt="Équipe Akwaba Immobilier" className="mt-8 aspect-[3/4] w-full rounded-xl object-cover" />
             </div>
           </Reveal>
         </div>
@@ -165,7 +165,7 @@ export default function AProposPage() {
           </div>
           <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {direction.map((member) => (
-              <div key={member.id} className="bg-card border border-border">
+              <div key={member.id} className="overflow-hidden rounded-xl bg-card border border-border">
                 <div className="aspect-[3/4] overflow-hidden bg-muted">
                   <img src={member.photo} alt={member.name} className="h-full w-full object-cover" />
                 </div>

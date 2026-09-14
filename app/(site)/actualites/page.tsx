@@ -48,7 +48,7 @@ export default function ActualitesPage() {
               {newsArticles.map((article, i) => (
                 <Reveal key={article.id} delay={(i % 6) * 50}>
                   <Link href={`/magazine/${article.slug}`} className="group flex flex-col gap-5 py-7 sm:flex-row sm:items-center">
-                    <div className="aspect-[4/3] w-full shrink-0 overflow-hidden bg-muted sm:w-48">
+                    <div className="aspect-[4/3] w-full shrink-0 overflow-hidden rounded-lg bg-muted sm:w-48">
                       <img src={article.image} alt={article.title} className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105" />
                     </div>
                     <div>

@@ -130,7 +130,7 @@ export default function InvestirPage() {
           <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {opportunityTypes.map((type, i) => (
               <Reveal key={type.id} delay={i * 80}>
-                <Link href={`/investir/opportunites#${type.id}`} className="group block h-full bg-card">
+                <Link href={`/investir/opportunites#${type.id}`} className="group block h-full overflow-hidden rounded-xl bg-card">
                   <div className="relative aspect-[4/3] overflow-hidden bg-muted">
                     <img src={type.image} alt={type.title} className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105" />
                     <Badge className="absolute left-4 top-4">{type.tag}</Badge>

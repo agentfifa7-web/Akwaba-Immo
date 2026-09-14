@@ -28,7 +28,7 @@ export default function ProjetsLivresPage() {
         ) : (
           <div className="grid gap-x-6 gap-y-14 md:grid-cols-2">
             {delivered.map((project) => (
-              <Link key={project.id} href={`/projets/${project.slug}`} className="group block border border-border bg-card">
+              <Link key={project.id} href={`/projets/${project.slug}`} className="group block overflow-hidden rounded-xl border border-border bg-card">
                 <div className="relative aspect-[16/10] overflow-hidden bg-muted">
                   <img src={project.images[0]} alt={project.name} className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105" />
                   <Badge variant="graphite" className="absolute left-4 top-4">Livré</Badge>

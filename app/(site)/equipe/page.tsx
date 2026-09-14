@@ -72,7 +72,7 @@ export default function EquipePage() {
 
         <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {filtered.map((member, i) => (
-            <Reveal key={member.id} delay={i * 50} className="border border-border bg-card">
+            <Reveal key={member.id} delay={i * 50} className="overflow-hidden rounded-xl border border-border bg-card">
               <div className="aspect-[3/4] overflow-hidden bg-muted">
                 <img src={member.photo} alt={member.name} className="h-full w-full object-cover" />
               </div>

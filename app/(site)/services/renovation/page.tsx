@@ -75,7 +75,7 @@ export default function RenovationPage() {
       <section className="border-y border-border bg-secondary/60">
         <div className="mx-auto max-w-7xl px-5 py-20 lg:px-10 lg:py-24">
           <div className="grid gap-12 lg:grid-cols-2 lg:items-center">
-            <div className="aspect-[4/3] overflow-hidden bg-muted lg:order-2">
+            <div className="aspect-[4/3] overflow-hidden rounded-xl bg-muted lg:order-2">
               <img
                 src="https://images.unsplash.com/photo-1503387837-b154d5074bd2?auto=format&fit=crop&w=1200&q=85"
                 alt="Chantier de rénovation"

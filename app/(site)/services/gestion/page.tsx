@@ -99,7 +99,7 @@ export default function GestionPage() {
                 ))}
               </ul>
             </div>
-            <div className="aspect-[4/3] overflow-hidden bg-muted">
+            <div className="aspect-[4/3] overflow-hidden rounded-xl bg-muted">
               <img
                 src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=1200&q=85"
                 alt="Gestionnaire locatif au travail"

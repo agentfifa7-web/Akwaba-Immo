@@ -69,7 +69,7 @@ export default function VideoPage() {
             <div className="mt-10 grid gap-x-6 gap-y-10 md:grid-cols-3">
               {related.map((v) => (
                 <Link key={v.id} href={`/tv/${v.slug}`} className="group block">
-                  <div className="relative aspect-video overflow-hidden bg-muted">
+                  <div className="relative aspect-video overflow-hidden rounded-xl bg-muted">
                     <img src={v.thumbnail} alt={v.title} className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105" />
                     <div className="absolute inset-0 flex items-center justify-center bg-graphite/20 transition-colors group-hover:bg-graphite/35">
                       <span className="flex size-12 items-center justify-center rounded-full bg-white/90 text-graphite">

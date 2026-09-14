@@ -60,7 +60,7 @@ export default function ProjetsAVenirPage() {
 
         <div className="mt-10 grid gap-8 lg:grid-cols-2">
           {upcoming.map((project) => (
-            <div key={project.id} className="border border-border bg-card">
+            <div key={project.id} className="overflow-hidden rounded-xl border border-border bg-card">
               <div className="relative aspect-[16/9] overflow-hidden bg-muted">
                 <img src={project.images[0]} alt={project.name} className="h-full w-full object-cover" />
                 <Badge className="absolute left-4 top-4">À venir</Badge>

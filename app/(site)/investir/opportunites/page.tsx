@@ -136,7 +136,7 @@ export default function OpportunitesPage() {
         </div>
         <div className="mt-12 grid gap-x-6 gap-y-10 md:grid-cols-3">
           {projetsAVenir.map((project) => (
-            <div key={project.id} className="border border-border">
+            <div key={project.id} className="overflow-hidden rounded-xl border border-border">
               <div className="relative aspect-[16/11] overflow-hidden bg-muted">
                 <img src={project.images[0]} alt={project.name} className="h-full w-full object-cover" />
                 <Badge className="absolute left-4 top-4">À venir</Badge>

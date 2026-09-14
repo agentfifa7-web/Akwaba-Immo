@@ -58,7 +58,7 @@ export default function ProjectDetailPage() {
             {/* GALERIE */}
             {images.length > 1 && (
               <div>
-                <div className="relative aspect-[16/9] overflow-hidden bg-muted">
+                <div className="relative aspect-[16/9] overflow-hidden rounded-xl bg-muted">
                   <img src={images[activeImage]} alt={project.name} className="h-full w-full object-cover" />
                   <button
                     aria-label="Image précédente"
@@ -80,7 +80,7 @@ export default function ProjectDetailPage() {
                     <button
                       key={img + i}
                       onClick={() => setActiveImage(i)}
-                      className={`aspect-[4/3] overflow-hidden border-2 transition-colors ${i === activeImage ? 'border-primary' : 'border-transparent opacity-70 hover:opacity-100'}`}
+                      className={`aspect-[4/3] overflow-hidden rounded-lg border-2 transition-colors ${i === activeImage ? 'border-primary' : 'border-transparent opacity-70 hover:opacity-100'}`}
                     >
                       <img src={img} alt="" className="h-full w-full object-cover" />
                     </button>

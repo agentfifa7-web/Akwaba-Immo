@@ -69,7 +69,7 @@ export default function MagazinePage() {
           {filtered.map((article, i) => (
             <Reveal key={article.id} delay={(i % 6) * 60}>
               <Link href={`/magazine/${article.slug}`} className="group block">
-                <div className="aspect-[4/3] overflow-hidden bg-muted">
+                <div className="aspect-[4/3] overflow-hidden rounded-xl bg-muted">
                   <img src={article.image} alt={article.title} className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105" />
                 </div>
                 <div className="border-b border-border py-5">
