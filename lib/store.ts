@@ -142,6 +142,7 @@ export function useFavorites() {
 // ---- Mon Avatar (Try-On) -----------------------------------------------------
 
 export interface AvatarConfig {
+  mannequinId: string
   skinTone: string
   faceShape: string
   hairstyle: string
@@ -160,6 +161,7 @@ export interface AvatarConfig {
 }
 
 export const defaultAvatar: AvatarConfig = {
+  mannequinId: 'mq-1',
   skinTone: '#B97A46',
   faceShape: 'Ovale',
   hairstyle: 'Lace wig lisse',

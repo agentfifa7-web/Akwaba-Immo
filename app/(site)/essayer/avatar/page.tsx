@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { RotateCcw } from 'lucide-react'
 
 import { useAvatar } from '@/lib/store'
+import { mannequins } from '@/lib/mannequins'
 import { AvatarPreview } from '@/components/site/avatar-preview'
 import { SectionHeading } from '@/components/site/section-heading'
 import { Button } from '@/components/ui/button'
@@ -11,7 +12,6 @@ import { Select } from '@/components/ui/select'
 import { Label } from '@/components/ui/label'
 import { cn } from '@/lib/utils'
 
-const skinTones = ['#F2D2B0', '#E4B588', '#C98A4B', '#A9713F', '#7A4B26', '#4A2E1C']
 const faceShapes = ['Ovale', 'Ronde', 'Carrée', 'Cœur', 'Allongée']
 const hairLengths = ['Courte', 'Mi-longue', 'Longue']
 const bodyTypes = ['Silhouette fine', 'Silhouette moyenne', 'Silhouette généreuse', 'Silhouette athlétique']
@@ -42,29 +42,37 @@ export default function MyAvatarPage() {
 
         <div className="space-y-10">
           <div>
+            <h3 className="font-serif text-xl">Mon mannequin</h3>
+            <p className="mt-1 text-xs text-muted-foreground">
+              Choisissez la photo qui servira de base à vos essayages — maquillage, coiffure et tenues s’appliqueront dessus.
+            </p>
+            <div className="mt-4 grid grid-cols-3 gap-3 sm:grid-cols-6">
+              {mannequins.map((m) => (
+                <button
+                  key={m.id}
+                  type="button"
+                  onClick={() => update({ mannequinId: m.id, skinTone: m.skinTone })}
+                  className={cn(
+                    'overflow-hidden rounded-xl border-2 text-left transition-colors',
+                    config.mannequinId === m.id ? 'border-primary' : 'border-transparent hover:border-primary/40',
+                  )}
+                >
+                  <div className="aspect-[3/4] overflow-hidden bg-muted">
+                    <img src={m.photo} alt={m.name} className="h-full w-full object-cover object-[center_22%]" />
+                  </div>
+                  <p className="px-1.5 py-1.5 text-center text-[11px] font-medium text-foreground">{m.name}</p>
+                </button>
+              ))}
+            </div>
+          </div>
+
+          <div>
             <h3 className="font-serif text-xl">Visage</h3>
-            <div className="mt-4 grid gap-6 sm:grid-cols-2">
-              <div>
-                <Label>Teint de peau</Label>
-                <div className="flex flex-wrap gap-2">
-                  {skinTones.map((tone) => (
-                    <button
-                      key={tone}
-                      type="button"
-                      onClick={() => update({ skinTone: tone })}
-                      className={cn('size-9 rounded-full border-2', config.skinTone === tone ? 'border-primary' : 'border-transparent')}
-                      style={{ backgroundColor: tone }}
-                      aria-label={tone}
-                    />
-                  ))}
-                </div>
-              </div>
-              <div>
-                <Label>Forme du visage</Label>
-                <Select value={config.faceShape} onChange={(e) => update({ faceShape: e.target.value })}>
-                  {faceShapes.map((f) => <option key={f}>{f}</option>)}
-                </Select>
-              </div>
+            <div className="mt-4">
+              <Label>Forme du visage</Label>
+              <Select value={config.faceShape} onChange={(e) => update({ faceShape: e.target.value })}>
+                {faceShapes.map((f) => <option key={f}>{f}</option>)}
+              </Select>
             </div>
           </div>
 
