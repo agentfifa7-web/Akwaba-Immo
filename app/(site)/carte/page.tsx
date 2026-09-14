@@ -42,8 +42,8 @@ export default function CartePage() {
     const map = new Map<string, number>()
     villesCouvertes.forEach((v) => {
       const nb =
-        properties.filter((p) => p.city === v || p.district === v).length +
-        projects.filter((p) => p.city === v || p.district === v).length
+        properties.filter((p) => p.city.includes(v) || p.district.includes(v)).length +
+        projects.filter((p) => p.city.includes(v) || p.district.includes(v)).length
       map.set(v, nb)
     })
     return map
@@ -54,8 +54,8 @@ export default function CartePage() {
     const items: PinItem[] = []
     cities.forEach((city) => {
       const base = cityPositions[city] ?? { x: 50, y: 50 }
-      const matchingProps = properties.filter((p) => p.city === city || p.district === city)
-      const matchingProjects = projects.filter((p) => p.city === city || p.district === city)
+      const matchingProps = properties.filter((p) => p.city.includes(city) || p.district.includes(city))
+      const matchingProjects = projects.filter((p) => p.city.includes(city) || p.district.includes(city))
       matchingProps.forEach((p, i) => {
         items.push({
           kind: 'property',
