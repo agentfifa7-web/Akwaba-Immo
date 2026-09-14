@@ -358,6 +358,7 @@ export const properties: Property[] = [
     bedrooms: 4, bathrooms: 4, badges: ['COUP DE CŒUR'], images: [img('photo-1499793983690-e29da59ef1c2'), img('photo-1615529182904-14819c35db37')],
     description: 'Villa pieds dans l’eau avec ponton privé, idéale pour vos week-ends et réceptions au bord de la lagune Aby.',
     features: ['Ponton privé', 'Piscine', 'Vue lagune', 'Personnel de maison inclus'],
+    virtualTourUrl: '#visite-360',
     documents: [], agentId: 'agt-7', coordinates: { lat: 5.1333, lng: -3.2833 }, createdAt: '2026-08-28', featured: true,
   },
   {
@@ -406,6 +407,7 @@ export const properties: Property[] = [
     images: [img('photo-1512917774080-9991f1c4c750'), img('photo-1512918728675-ed5a9ecdebfd')],
     description: 'Penthouse d’exception avec terrasse panoramique de 120 m², jacuzzi et vue dégagée sur Abidjan.',
     features: ['Terrasse panoramique', 'Jacuzzi', 'Cave à vin', 'Domotique'],
+    virtualTourUrl: '#visite-360',
     documents: [], agentId: 'agt-7', coordinates: { lat: 5.3389, lng: -3.9639 }, createdAt: '2026-09-05', featured: true,
   },
 ]
@@ -678,6 +680,27 @@ export function getVideoBySlug(slug: string): VideoItem | undefined {
 
 export function getAgentById(id: string): TeamMember | undefined {
   return agents.find((a) => a.id === id)
+}
+
+// Type de document faisant foi de propriété/occupation, accepté par catégorie
+// de bien. Un bien est considéré « dossier vérifié » dès lors qu'au moins un
+// de ces documents est présent — c'est la pièce juridique essentielle,
+// les autres documents (plans, brochures...) sont complémentaires.
+const proofDocumentKeywords: Record<PropertyCategory, string[]> = {
+  terrain: ['titre foncier', 'certificat foncier', 'attestation villageoise', 'acd'],
+  villa: ['titre foncier', 'attestation villageoise'],
+  maison: ['titre foncier', 'attestation villageoise'],
+  appartement: ['titre foncier', 'règlement de copropriété'],
+  immeuble: ['titre foncier'],
+  bureau: ['titre foncier', 'règlement de copropriété'],
+  commerce: ['titre foncier', 'règlement de copropriété'],
+}
+
+/** Un bien est « certifié » quand sa pièce de propriété essentielle est au dossier. */
+export function hasVerifiedDocumentation(property: Property): boolean {
+  const accepted = proofDocumentKeywords[property.category] ?? []
+  if (accepted.length === 0 || property.documents.length === 0) return false
+  return accepted.some((keyword) => property.documents.some((doc) => doc.label.toLowerCase().includes(keyword)))
 }
 
 export function similarProperties(property: Property, count = 3): Property[] {

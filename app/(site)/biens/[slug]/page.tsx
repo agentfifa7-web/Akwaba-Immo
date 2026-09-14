@@ -20,6 +20,7 @@ import {
   Maximize,
   MessageCircle,
   Phone,
+  Rotate3d,
   Ruler,
   ShieldCheck,
   Sparkles,
@@ -31,6 +32,7 @@ import {
 import {
   getAgentById,
   getPropertyBySlug,
+  hasVerifiedDocumentation,
   propertyPriceDisplay,
   similarProperties,
   type PropertyCategory,
@@ -177,6 +179,16 @@ export default function PropertyDetailPage() {
                 {b}
               </Badge>
             ))}
+            {hasVerifiedDocumentation(property) && (
+              <Badge variant="white">
+                <ShieldCheck className="size-3 text-primary" /> Dossier vérifié
+              </Badge>
+            )}
+            {property.virtualTourUrl && (
+              <Badge variant="white">
+                <Rotate3d className="size-3 text-primary" /> Visite 360°
+              </Badge>
+            )}
           </div>
           <button
             type="button"
@@ -331,7 +343,14 @@ export default function PropertyDetailPage() {
             {/* DOCUMENTS */}
             {hasDocs && (
               <div id="documents" className="mt-12 scroll-mt-28">
-                <h2 className="font-serif text-2xl">Documents disponibles</h2>
+                <h2 className="flex items-center gap-2 font-serif text-2xl">
+                  Documents disponibles
+                  {hasVerifiedDocumentation(property) && (
+                    <span className="flex items-center gap-1 text-xs font-semibold uppercase tracking-wider text-primary">
+                      <ShieldCheck className="size-4" /> Dossier vérifié
+                    </span>
+                  )}
+                </h2>
                 <div className="mt-5 flex flex-col gap-2.5">
                   {property.documents.map((doc) => (
                     <div key={doc.label} className="flex items-center justify-between gap-4 rounded-xl border border-border bg-card px-5 py-4">

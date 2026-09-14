@@ -1,10 +1,10 @@
 'use client'
 
 import Link from 'next/link'
-import { Heart, Share2 } from 'lucide-react'
+import { Heart, Rotate3d, Share2, ShieldCheck } from 'lucide-react'
 
 import type { Property } from '@/lib/data'
-import { propertyPriceDisplay } from '@/lib/data'
+import { hasVerifiedDocumentation, propertyPriceDisplay } from '@/lib/data'
 import { useFavorites } from '@/lib/store'
 import { Badge } from '@/components/ui/badge'
 import { cn } from '@/lib/utils'
@@ -53,6 +53,20 @@ export function PropertyCard({ property, className }: { property: Property; clas
             <Share2 className="size-4" />
           </button>
         </div>
+        {(hasVerifiedDocumentation(property) || property.virtualTourUrl) && (
+          <div className="absolute bottom-4 left-4 flex flex-wrap gap-2">
+            {hasVerifiedDocumentation(property) && (
+              <span className="flex items-center gap-1.5 rounded-full bg-white/95 px-3 py-1.5 text-[10px] font-semibold uppercase tracking-wider text-foreground shadow-sm">
+                <ShieldCheck className="size-3.5 text-primary" /> Dossier vérifié
+              </span>
+            )}
+            {property.virtualTourUrl && (
+              <span className="flex items-center gap-1.5 rounded-full bg-white/95 px-3 py-1.5 text-[10px] font-semibold uppercase tracking-wider text-foreground shadow-sm">
+                <Rotate3d className="size-3.5 text-primary" /> Visite 360°
+              </span>
+            )}
+          </div>
+        )}
       </Link>
       <div className="border-b border-border py-5">
         <div className="flex items-start justify-between gap-4">
