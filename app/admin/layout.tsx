@@ -12,10 +12,10 @@ function BrandMark() {
   return (
     <Link href="/admin" className="flex items-center gap-2.5 px-1">
       <span className="flex size-8 shrink-0 items-center justify-center bg-primary text-sm font-bold text-primary-foreground">
-        A
+        K
       </span>
       <span className="flex flex-col leading-none">
-        <span className="font-serif text-sm font-semibold tracking-wide text-white">AKWABA</span>
+        <span className="font-serif text-sm font-semibold tracking-wide text-white">KÔSMÉA</span>
         <span className="text-[10px] font-semibold uppercase tracking-[0.25em] text-white/50">Admin</span>
       </span>
     </Link>
@@ -70,7 +70,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   return (
     <div className="min-h-screen bg-background text-foreground">
       {/* Sidebar desktop */}
-      <aside className="fixed inset-y-0 left-0 z-30 hidden w-64 flex-col bg-graphite text-graphite-foreground lg:flex">
+      <aside className="fixed inset-y-0 left-0 z-30 hidden w-64 flex-col bg-obsidian text-obsidian-foreground lg:flex">
         <div className="border-b border-white/10 px-4 py-5">
           <BrandMark />
         </div>
@@ -87,7 +87,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
       </aside>
 
       {/* Top bar mobile */}
-      <div className="sticky top-0 z-30 flex items-center justify-between border-b border-white/10 bg-graphite px-4 py-3 text-graphite-foreground lg:hidden">
+      <div className="sticky top-0 z-30 flex items-center justify-between border-b border-white/10 bg-obsidian px-4 py-3 text-obsidian-foreground lg:hidden">
         <BrandMark />
         <button
           type="button"
@@ -103,7 +103,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
       {mobileOpen ? (
         <div className="fixed inset-0 z-40 lg:hidden">
           <div className="absolute inset-0 bg-black/50" onClick={() => setMobileOpen(false)} />
-          <div className="absolute inset-y-0 left-0 flex w-72 flex-col bg-graphite text-graphite-foreground shadow-2xl">
+          <div className="absolute inset-y-0 left-0 flex w-72 flex-col bg-obsidian text-obsidian-foreground shadow-2xl">
             <div className="flex items-center justify-between border-b border-white/10 px-4 py-5">
               <BrandMark />
               <button

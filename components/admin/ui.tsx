@@ -1,4 +1,4 @@
-// AKWABA ADMIN — petits composants d'interface partagés par les modules du back-office
+// KÔSMÉA ADMIN / PRO — petits composants d'interface partagés par les back-offices
 import type { LucideIcon } from 'lucide-react'
 import { cn } from '@/lib/utils'
 
@@ -83,44 +83,64 @@ export function EmptyState({ label = 'Chargement…' }: { label?: string }) {
 }
 
 const statusTones: Record<string, string> = {
-  // demandes / leads
-  nouvelle: 'bg-primary/10 text-primary',
-  en_cours: 'bg-amber-500/10 text-amber-600',
-  traitee: 'bg-emerald-500/10 text-emerald-600',
-  cloturee: 'bg-muted text-muted-foreground',
+  // commandes
+  recue: 'bg-primary/10 text-primary',
+  paiement_confirme: 'bg-amber-500/10 text-amber-600',
+  preparation: 'bg-amber-500/10 text-amber-600',
+  prete: 'bg-sky-500/10 text-sky-600',
+  expediee: 'bg-sky-500/10 text-sky-600',
+  en_livraison: 'bg-sky-500/10 text-sky-600',
+  livree: 'bg-emerald-500/10 text-emerald-600',
   // rendez-vous
   en_attente: 'bg-amber-500/10 text-amber-600',
   confirme: 'bg-emerald-500/10 text-emerald-600',
   annule: 'bg-destructive/10 text-destructive',
   termine: 'bg-muted text-muted-foreground',
-  // documents
-  disponible: 'bg-emerald-500/10 text-emerald-600',
-  // programmes immobiliers
-  en_commercialisation: 'bg-primary/10 text-primary',
-  en_construction: 'bg-amber-500/10 text-amber-600',
-  a_venir: 'bg-muted text-muted-foreground',
-  livre: 'bg-emerald-500/10 text-emerald-600',
+  // demandes de création sur mesure
+  nouvelle: 'bg-primary/10 text-primary',
+  en_discussion: 'bg-amber-500/10 text-amber-600',
+  devis_envoye: 'bg-sky-500/10 text-sky-600',
+  acceptee: 'bg-emerald-500/10 text-emerald-600',
+  en_production: 'bg-amber-500/10 text-amber-600',
+  // vendeurs / boutiques / stylistes
+  VERIFIED: 'bg-sky-500/10 text-sky-600',
+  PREMIUM: 'bg-champagne/20 text-terracotta',
+  TOP: 'bg-emerald-500/10 text-emerald-600',
+  NOUVEAU: 'bg-primary/10 text-primary',
   // générique
   actif: 'bg-emerald-500/10 text-emerald-600',
   inactif: 'bg-muted text-muted-foreground',
+  publie: 'bg-emerald-500/10 text-emerald-600',
+  brouillon: 'bg-muted text-muted-foreground',
+  signale: 'bg-destructive/10 text-destructive',
 }
 
 const statusLabels: Record<string, string> = {
-  nouvelle: 'Nouvelle',
-  en_cours: 'En cours',
-  traitee: 'Traitée',
-  cloturee: 'Clôturée',
+  recue: 'Reçue',
+  paiement_confirme: 'Paiement confirmé',
+  preparation: 'Préparation',
+  prete: 'Prête',
+  expediee: 'Expédiée',
+  en_livraison: 'En livraison',
+  livree: 'Livrée',
   en_attente: 'En attente',
   confirme: 'Confirmé',
   annule: 'Annulé',
   termine: 'Terminé',
-  disponible: 'Disponible',
-  en_commercialisation: 'En commercialisation',
-  en_construction: 'En construction',
-  a_venir: 'À venir',
-  livre: 'Livré',
+  nouvelle: 'Nouvelle',
+  en_discussion: 'En discussion',
+  devis_envoye: 'Devis envoyé',
+  acceptee: 'Acceptée',
+  en_production: 'En production',
+  VERIFIED: 'Vérifié',
+  PREMIUM: 'Premium',
+  TOP: 'Top vendeur',
+  NOUVEAU: 'Nouveau',
   actif: 'Actif',
   inactif: 'Inactif',
+  publie: 'Publié',
+  brouillon: 'Brouillon',
+  signale: 'Signalé',
 }
 
 export function StatusPill({ status }: { status: string }) {

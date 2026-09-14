@@ -1,0 +1,109 @@
+'use client'
+
+import Link from 'next/link'
+import { usePathname, useRouter } from 'next/navigation'
+import {
+  CalendarDays,
+  Crown,
+  Heart,
+  LayoutDashboard,
+  LogOut,
+  Package,
+  Shirt,
+  Sparkles,
+} from 'lucide-react'
+
+import { useAuth } from '@/lib/store'
+import { cn } from '@/lib/utils'
+
+const navItems = [
+  { href: '/mon-kosmea', label: 'Tableau de bord', icon: LayoutDashboard },
+  { href: '/mon-kosmea/dressing', label: 'Mon dressing', icon: Shirt },
+  { href: '/mon-kosmea/favoris', label: 'Mes favoris', icon: Heart },
+  { href: '/mon-kosmea/commandes', label: 'Mes commandes', icon: Package },
+  { href: '/mon-kosmea/rendez-vous', label: 'Mes rendez-vous', icon: CalendarDays },
+  { href: '/mon-kosmea/recompenses', label: 'Récompenses', icon: Crown },
+]
+
+export default function MonKosmeaLayout({ children }: { children: React.ReactNode }) {
+  const { user, logout, hydrated } = useAuth()
+  const pathname = usePathname()
+  const router = useRouter()
+
+  function handleLogout() {
+    logout()
+    router.push('/')
+  }
+
+  return (
+    <div className="border-b border-border bg-secondary/30">
+      <div className="mx-auto max-w-7xl px-5 py-10 lg:px-10 lg:py-14">
+        <div className="flex flex-col justify-between gap-2 border-b border-border pb-8 sm:flex-row sm:items-end">
+          <div>
+            <p className="mb-2 flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.3em] text-accent">
+              <Sparkles className="size-3.5" /> Mon KÔSMÉA
+            </p>
+            <h1 className="font-serif text-3xl leading-tight sm:text-4xl">
+              {hydrated ? `Bonjour, ${user?.name ?? 'bienvenue'}` : 'Bonjour'}
+            </h1>
+          </div>
+          {hydrated && user && (
+            <p className="text-xs uppercase tracking-wider text-muted-foreground">
+              {user.accountType === 'client' ? 'Compte client' : `Compte ${user.accountType}`} · {user.email}
+            </p>
+          )}
+        </div>
+
+        {!hydrated && <div className="mt-10 h-32 animate-kosmea-shimmer" />}
+
+        {hydrated && !user && (
+          <div className="mt-10 flex flex-col items-start gap-4 border border-border bg-card p-8 lg:p-10">
+            <p className="font-serif text-2xl">Connectez-vous pour accéder à votre espace</p>
+            <p className="max-w-lg leading-7 text-muted-foreground">
+              Votre dressing, vos favoris, vos commandes, vos rendez-vous et vos récompenses vous attendent dès que
+              vous êtes connecté·e à votre compte KÔSMÉA.
+            </p>
+            <Link
+              href="/connexion"
+              className="mt-2 rounded-lg bg-primary px-6 py-4 text-xs font-semibold uppercase tracking-wider text-primary-foreground shadow-sm shadow-primary/20 transition-all duration-200 hover:-translate-y-0.5 hover:bg-primary/90 hover:shadow-lg hover:shadow-primary/25 active:translate-y-0"
+            >
+              Se connecter
+            </Link>
+          </div>
+        )}
+
+        {hydrated && user && (
+          <div className="mt-10 flex flex-col gap-8 lg:flex-row lg:items-start">
+            <nav className="flex shrink-0 gap-1 overflow-x-auto border border-border bg-card p-1.5 lg:w-64 lg:flex-col lg:gap-0.5 lg:overflow-visible lg:p-2">
+              {navItems.map((item) => {
+                const active = pathname === item.href
+                const Icon = item.icon
+                return (
+                  <Link
+                    key={item.href}
+                    href={item.href}
+                    className={cn(
+                      'flex shrink-0 items-center gap-2.5 whitespace-nowrap px-3.5 py-2.5 text-xs font-semibold uppercase tracking-wider transition-colors lg:whitespace-normal',
+                      active ? 'bg-primary text-primary-foreground' : 'text-muted-foreground hover:bg-muted hover:text-foreground',
+                    )}
+                  >
+                    <Icon className="size-4 shrink-0" /> {item.label}
+                  </Link>
+                )
+              })}
+              <button
+                type="button"
+                onClick={handleLogout}
+                className="mt-0 flex shrink-0 items-center gap-2.5 whitespace-nowrap border-t-0 px-3.5 py-2.5 text-xs font-semibold uppercase tracking-wider text-muted-foreground transition-colors hover:bg-muted hover:text-primary lg:mt-2 lg:border-t lg:border-border lg:whitespace-normal lg:pt-4"
+              >
+                <LogOut className="size-4 shrink-0" /> Se déconnecter
+              </button>
+            </nav>
+
+            <div className="min-w-0 flex-1 border border-border bg-background p-6 lg:p-8">{children}</div>
+          </div>
+        )}
+      </div>
+    </div>
+  )
+}

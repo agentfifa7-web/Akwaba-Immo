@@ -1,127 +1,144 @@
 'use client'
 
-import { Suspense, useMemo, useState } from 'react'
-import { useSearchParams } from 'next/navigation'
-import { Search } from 'lucide-react'
+import { useMemo, useState } from 'react'
+import Link from 'next/link'
+import { Search, Sparkles, X } from 'lucide-react'
 
-import { properties, type PropertyCategory, type TransactionType } from '@/lib/data'
-import { PropertyCard } from '@/components/site/property-card'
-import { Select } from '@/components/ui/select'
+import { boutiques, formatFCFA, looks, products, stylists } from '@/lib/data'
+import { describeQuery, parseQuery } from '@/lib/assistant'
+import { useLocalStorageState } from '@/lib/store'
+import { Badge } from '@/components/ui/badge'
 
-const categoryLabels: Record<PropertyCategory, string> = {
-  villa: 'Villa',
-  maison: 'Maison',
-  appartement: 'Appartement',
-  terrain: 'Terrain',
-  bureau: 'Bureau',
-  commerce: 'Commerce',
-  immeuble: 'Immeuble',
-}
+const popularSearches = ['Rouge à lèvres nude', 'Lace wig bouclée', 'Robe wax mariage', 'Maquilleuse Cocody', 'Sac en cuir']
 
-const sortOptions = [
-  { value: 'pertinence', label: 'Pertinence' },
-  { value: 'prix-croissant', label: 'Prix croissant' },
-  { value: 'prix-decroissant', label: 'Prix décroissant' },
-  { value: 'recent', label: 'Plus récent' },
-  { value: 'superficie', label: 'Grande superficie' },
-] as const
-type SortValue = (typeof sortOptions)[number]['value']
+export default function SearchPage() {
+  const [query, setQuery] = useState('')
+  const [recent, setRecent] = useLocalStorageState<string[]>('kosmea_recent_searches', [])
 
-export default function RecherchePage() {
-  return (
-    <Suspense fallback={<div className="mx-auto max-w-7xl px-5 py-28 lg:px-10" />}>
-      <RechercheContent />
-    </Suspense>
-  )
-}
-
-function RechercheContent() {
-  const searchParams = useSearchParams()
-  const q = searchParams.get('q') ?? searchParams.get('localisation') ?? ''
-  const transaction = (searchParams.get('transaction') as TransactionType | null) ?? undefined
-  const categorie = (searchParams.get('type') as PropertyCategory | null) ?? (searchParams.get('categorie') as PropertyCategory | null) ?? undefined
-  const budgetMax = searchParams.get('budget') ? Number(searchParams.get('budget')) : undefined
-
-  const [sort, setSort] = useState<SortValue>('pertinence')
+  const parsed = useMemo(() => parseQuery(query), [query])
+  const filters = describeQuery(parsed)
+  const lower = query.trim().toLowerCase()
 
   const results = useMemo(() => {
-    let list = properties.filter((p) => {
-      if (transaction && p.transaction !== transaction) return false
-      if (categorie && p.category !== categorie) return false
-      if (budgetMax && p.price > budgetMax) return false
-      if (q) {
-        const needle = q.toLowerCase()
-        const haystack = `${p.title} ${p.city} ${p.district} ${p.category}`.toLowerCase()
-        if (!haystack.includes(needle)) return false
-      }
-      return true
-    })
-    list = [...list]
-    switch (sort) {
-      case 'prix-croissant':
-        list.sort((a, b) => a.price - b.price)
-        break
-      case 'prix-decroissant':
-        list.sort((a, b) => b.price - a.price)
-        break
-      case 'recent':
-        list.sort((a, b) => (a.createdAt < b.createdAt ? 1 : -1))
-        break
-      case 'superficie':
-        list.sort((a, b) => b.surface - a.surface)
-        break
-      default:
-        list.sort((a, b) => Number(b.featured) - Number(a.featured))
+    if (!lower) return { products: [], looks: [], boutiques: [], stylists: [] }
+    return {
+      products: products.filter((p) => p.name.toLowerCase().includes(lower) || p.brand.toLowerCase().includes(lower) || p.tags.some((t) => t.toLowerCase().includes(lower)) || p.subcategory.toLowerCase().includes(lower)).slice(0, 8),
+      looks: looks.filter((l) => l.title.toLowerCase().includes(lower) || l.category.toLowerCase().includes(lower)).slice(0, 4),
+      boutiques: boutiques.filter((b) => b.name.toLowerCase().includes(lower)).slice(0, 4),
+      stylists: stylists.filter((s) => s.name.toLowerCase().includes(lower) || s.specialties.some((sp) => sp.toLowerCase().includes(lower))).slice(0, 4),
     }
-    return list
-  }, [q, transaction, categorie, budgetMax, sort])
+  }, [lower])
+
+  function commitSearch(term: string) {
+    if (!term.trim()) return
+    setQuery(term)
+    setRecent((prev) => [term, ...prev.filter((r) => r !== term)].slice(0, 6))
+  }
+
+  const hasResults = results.products.length + results.looks.length + results.boutiques.length + results.stylists.length > 0
 
   return (
-    <div>
-      <section className="border-b border-border bg-secondary/60">
-        <div className="mx-auto max-w-7xl px-5 py-14 lg:px-10 lg:py-16">
-          <p className="mb-3 flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.3em] text-primary">
-            <Search className="size-3.5" /> Résultats de recherche
-          </p>
-          <h1 className="font-serif text-4xl leading-tight sm:text-5xl">
-            {q ? `Résultats pour « ${q} »` : 'Résultats de recherche'}
-          </h1>
-          <p className="mt-4 text-sm text-muted-foreground">
-            {[transaction ? (transaction === 'vente' ? 'À vendre' : 'À louer') : null, categorie ? categoryLabels[categorie] : null, budgetMax ? `Budget max. ${budgetMax.toLocaleString('fr-FR')} FCFA` : null]
-              .filter(Boolean)
-              .join(' · ') || 'Tous les biens du catalogue'}
-          </p>
-        </div>
-      </section>
+    <div className="mx-auto max-w-4xl px-5 py-14 lg:px-10 lg:py-20">
+      <h1 className="font-serif text-3xl">Recherche</h1>
+      <p className="mt-2 text-sm text-muted-foreground">Recherche classique et recherche IA en langage naturel, sur toute la marketplace.</p>
 
-      <section className="mx-auto max-w-7xl px-5 py-14 lg:px-10 lg:py-16">
-        <div className="flex flex-col justify-between gap-4 border-b border-border pb-5 sm:flex-row sm:items-center">
-          <p className="text-sm text-muted-foreground">
-            <span className="font-serif text-2xl text-foreground">{results.length}</span>{' '}
-            bien{results.length > 1 ? 's' : ''} correspondant{results.length > 1 ? 's' : ''} à vos critères
-          </p>
-          <Select value={sort} onChange={(e) => setSort(e.target.value as SortValue)} className="w-auto min-w-[190px]">
-            {sortOptions.map((opt) => (
-              <option key={opt.value} value={opt.value}>
-                Trier : {opt.label}
-              </option>
-            ))}
-          </Select>
-        </div>
-
-        {results.length === 0 ? (
-          <div className="mt-16 border border-dashed border-border py-20 text-center">
-            <p className="font-serif text-2xl">Aucun résultat pour cette recherche.</p>
-            <p className="mt-3 text-sm text-muted-foreground">Essayez d’élargir vos critères ou parcourez l’ensemble du catalogue.</p>
-          </div>
-        ) : (
-          <div className="mt-10 grid gap-x-6 gap-y-10 md:grid-cols-2 lg:grid-cols-3">
-            {results.map((property) => (
-              <PropertyCard key={property.id} property={property} />
-            ))}
-          </div>
+      <div className="mt-8 flex items-center gap-2 rounded-xl border border-border bg-card px-4 py-1">
+        <Search className="size-4 shrink-0 text-muted-foreground" />
+        <input
+          value={query}
+          onChange={(e) => setQuery(e.target.value)}
+          onKeyDown={(e) => e.key === 'Enter' && commitSearch(query)}
+          placeholder="Ex : « robe rouge élégante pour un mariage à moins de 100 000 FCFA »"
+          className="h-12 flex-1 bg-transparent text-sm outline-none"
+        />
+        {query && (
+          <button type="button" onClick={() => setQuery('')} aria-label="Effacer">
+            <X className="size-4 text-muted-foreground" />
+          </button>
         )}
-      </section>
+      </div>
+
+      {filters.length > 0 && (
+        <div className="mt-3 flex flex-wrap items-center gap-1.5">
+          <Sparkles className="size-3.5 text-accent" />
+          {filters.map((f) => <Badge key={f} variant="outline">{f}</Badge>)}
+        </div>
+      )}
+
+      {!query && (
+        <div className="mt-10 space-y-8">
+          {recent.length > 0 && (
+            <div>
+              <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">Recherches récentes</p>
+              <div className="mt-3 flex flex-wrap gap-2">
+                {recent.map((r) => (
+                  <button key={r} type="button" onClick={() => commitSearch(r)} className="rounded-full border border-border px-3.5 py-2 text-xs text-foreground hover:border-primary">{r}</button>
+                ))}
+              </div>
+            </div>
+          )}
+          <div>
+            <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">Recherches populaires</p>
+            <div className="mt-3 flex flex-wrap gap-2">
+              {popularSearches.map((r) => (
+                <button key={r} type="button" onClick={() => commitSearch(r)} className="rounded-full border border-border px-3.5 py-2 text-xs text-foreground hover:border-primary">{r}</button>
+              ))}
+            </div>
+          </div>
+          <Link href="/assistant" className="block border border-dashed border-border p-6 text-center text-sm text-muted-foreground hover:border-primary">
+            Besoin d’un look complet ? Essayez <span className="font-semibold text-accent">KÔSMÉA AI</span> →
+          </Link>
+        </div>
+      )}
+
+      {query && !hasResults && (
+        <div className="mt-10 border border-dashed border-border p-16 text-center text-sm text-muted-foreground">
+          Aucun résultat pour « {query} ». Essayez l’assistant KÔSMÉA AI pour une recherche plus précise.
+        </div>
+      )}
+
+      {query && hasResults && (
+        <div className="mt-10 space-y-10">
+          {results.products.length > 0 && (
+            <section>
+              <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">Produits</p>
+              <div className="mt-3 grid grid-cols-2 gap-3 sm:grid-cols-4">
+                {results.products.map((p) => (
+                  <Link key={p.id} href={`/produits/${p.slug}`} className="border border-border p-3 hover:border-primary">
+                    <div className="aspect-square overflow-hidden rounded-lg bg-muted"><img src={p.images[0]} alt={p.name} className="h-full w-full object-cover" /></div>
+                    <p className="mt-2 truncate text-xs font-medium">{p.name}</p>
+                    <p className="text-[11px] text-muted-foreground">{formatFCFA(p.price)}</p>
+                  </Link>
+                ))}
+              </div>
+            </section>
+          )}
+          {results.looks.length > 0 && (
+            <section>
+              <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">Looks</p>
+              <div className="mt-3 flex flex-wrap gap-3">
+                {results.looks.map((l) => <Link key={l.id} href={`/looks/${l.slug}`} className="rounded-full border border-border px-4 py-2 text-sm hover:border-primary">{l.title}</Link>)}
+              </div>
+            </section>
+          )}
+          {results.boutiques.length > 0 && (
+            <section>
+              <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">Boutiques</p>
+              <div className="mt-3 flex flex-wrap gap-3">
+                {results.boutiques.map((b) => <Link key={b.id} href={`/boutiques/${b.slug}`} className="rounded-full border border-border px-4 py-2 text-sm hover:border-primary">{b.name}</Link>)}
+              </div>
+            </section>
+          )}
+          {results.stylists.length > 0 && (
+            <section>
+              <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">Stylistes</p>
+              <div className="mt-3 flex flex-wrap gap-3">
+                {results.stylists.map((s) => <Link key={s.id} href={`/stylistes/${s.slug}`} className="rounded-full border border-border px-4 py-2 text-sm hover:border-primary">{s.name}</Link>)}
+              </div>
+            </section>
+          )}
+        </div>
+      )}
     </div>
   )
 }

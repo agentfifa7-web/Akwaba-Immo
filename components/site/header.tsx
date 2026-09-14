@@ -3,31 +3,33 @@
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useEffect, useState } from 'react'
-import { ChevronDown, Heart, Search, User, X, Menu as MenuIcon } from 'lucide-react'
+import { ChevronDown, Heart, Search, ShoppingBag, User, X, Menu as MenuIcon, Sparkles } from 'lucide-react'
 
-import { useFavorites } from '@/lib/store'
+import { useCart, useFavorites } from '@/lib/store'
 import { cn } from '@/lib/utils'
 
 const mainNav = [
-  { href: '/acheter', label: 'Acheter' },
-  { href: '/louer', label: 'Louer' },
-  { href: '/terrains', label: 'Terrains' },
-  { href: '/projets', label: 'Nos projets' },
-  { href: '/investir', label: 'Investir' },
+  { href: '/shop', label: 'Shop' },
+  { href: '/stylistes', label: 'Stylistes' },
+  { href: '/academy', label: 'Academy' },
+  { href: '/communaute', label: 'Communauté' },
+  { href: '/live', label: 'Live' },
 ]
 
-const services = [
-  { href: '/services/construction', label: 'Construction' },
-  { href: '/services/gestion', label: 'Gestion immobilière' },
-  { href: '/services/renovation', label: 'Réhabilitation & rénovation' },
-  { href: '/services/estimation', label: 'Estimation immobilière' },
-  { href: '/services/conseil', label: 'Conseil & accompagnement' },
-  { href: '/services/juridique', label: 'Accompagnement juridique' },
+const experienceMenu = [
+  { href: '/essayer', label: 'Try-On Hub' },
+  { href: '/essayer/maquillage', label: 'Essayer — Maquillage' },
+  { href: '/essayer/mode', label: 'Essayer — Mode' },
+  { href: '/essayer/coiffure', label: 'Essayer — Coiffure' },
+  { href: '/essayer/avatar', label: 'Mon Avatar' },
+  { href: '/creer/look', label: 'Créer mon look' },
+  { href: '/creer/tenue', label: 'Créer ma tenue' },
+  { href: '/creer/couleurs', label: 'Color Lab' },
 ]
 
 const secondaryNav = [
-  { href: '/magazine', label: 'Magazine' },
-  { href: '/a-propos', label: 'À propos' },
+  { href: '/boutiques', label: 'Boutiques' },
+  { href: '/privilege', label: 'Privilège' },
 ]
 
 export function Header() {
@@ -35,8 +37,9 @@ export function Header() {
   const isHome = pathname === '/'
   const [scrolled, setScrolled] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
-  const [servicesOpen, setServicesOpen] = useState(false)
-  const { ids, hydrated } = useFavorites()
+  const [experienceOpen, setExperienceOpen] = useState(false)
+  const { ids: wishIds, hydrated: wishHydrated } = useFavorites()
+  const { totalCount, hydrated: cartHydrated } = useCart()
 
   useEffect(() => {
     if (!isHome) return
@@ -61,29 +64,29 @@ export function Header() {
       )}
     >
       <div className="mx-auto flex max-w-7xl items-center justify-between px-5 py-5 lg:px-10">
-        <Link href="/" className={cn('font-serif text-xl font-semibold tracking-tight', textClass)}>
-          AKWABA <span className="text-primary">IMMOBILIER</span>
+        <Link href="/" className={cn('font-serif text-xl font-semibold tracking-[0.15em]', textClass)}>
+          KÔSMÉA<span className="text-accent">.</span>
         </Link>
 
         <nav className={cn('hidden shrink-0 items-center gap-5 whitespace-nowrap text-xs font-medium uppercase tracking-[0.12em] xl:flex', textClass)}>
-          <Link href="/" className="transition-colors hover:text-primary">
+          <Link href="/" className="transition-colors hover:text-accent">
             Accueil
           </Link>
           {mainNav.map((item) => (
-            <Link key={item.href} href={item.href} className="transition-colors hover:text-primary">
+            <Link key={item.href} href={item.href} className="transition-colors hover:text-accent">
               {item.label}
             </Link>
           ))}
-          <div className="relative" onMouseEnter={() => setServicesOpen(true)} onMouseLeave={() => setServicesOpen(false)}>
-            <button type="button" className="flex items-center gap-1 whitespace-nowrap transition-colors hover:text-primary">
-              Nos services <ChevronDown className="size-3" />
+          <div className="relative" onMouseEnter={() => setExperienceOpen(true)} onMouseLeave={() => setExperienceOpen(false)}>
+            <button type="button" className="flex items-center gap-1 whitespace-nowrap transition-colors hover:text-accent">
+              <Sparkles className="size-3.5" /> Essayer &amp; Créer <ChevronDown className="size-3" />
             </button>
-            {servicesOpen && (
+            {experienceOpen && (
               <div className="absolute left-1/2 top-full w-72 -translate-x-1/2 rounded-lg border border-border bg-background pt-1 normal-case tracking-normal text-foreground shadow-xl">
                 <div className="flex flex-col py-2">
-                  {services.map((service) => (
-                    <Link key={service.href} href={service.href} className="px-5 py-2.5 text-sm normal-case hover:bg-muted hover:text-primary">
-                      {service.label}
+                  {experienceMenu.map((item) => (
+                    <Link key={item.href} href={item.href} className="px-5 py-2.5 text-sm normal-case hover:bg-muted hover:text-accent">
+                      {item.label}
                     </Link>
                   ))}
                 </div>
@@ -91,7 +94,7 @@ export function Header() {
             )}
           </div>
           {secondaryNav.map((item) => (
-            <Link key={item.href} href={item.href} className="transition-colors hover:text-primary">
+            <Link key={item.href} href={item.href} className="transition-colors hover:text-accent">
               {item.label}
             </Link>
           ))}
@@ -99,36 +102,48 @@ export function Header() {
 
         <div className="flex items-center gap-1.5 sm:gap-3">
           <Link
-            href="/recherche-intelligente"
-            aria-label="Recherche intelligente"
-            className={cn('hidden size-9 items-center justify-center transition-colors hover:text-primary sm:flex', textClass)}
+            href="/recherche"
+            aria-label="Recherche"
+            className={cn('hidden size-9 items-center justify-center transition-colors hover:text-accent sm:flex', textClass)}
           >
             <Search className="size-[18px]" />
           </Link>
           <Link
-            href="/mon-espace/favoris"
+            href="/mon-kosmea/favoris"
             aria-label="Mes favoris"
-            className={cn('relative hidden size-9 items-center justify-center transition-colors hover:text-primary sm:flex', textClass)}
+            className={cn('relative hidden size-9 items-center justify-center transition-colors hover:text-accent sm:flex', textClass)}
           >
             <Heart className="size-[18px]" />
-            {hydrated && ids.length > 0 && (
-              <span className="absolute right-0 top-0 flex size-4 items-center justify-center rounded-full bg-primary text-[9px] text-primary-foreground">
-                {ids.length}
+            {wishHydrated && wishIds.length > 0 && (
+              <span className="absolute right-0 top-0 flex size-4 items-center justify-center rounded-full bg-accent text-[9px] text-accent-foreground">
+                {wishIds.length}
+              </span>
+            )}
+          </Link>
+          <Link
+            href="/panier"
+            aria-label="Mon panier"
+            className={cn('relative hidden size-9 items-center justify-center transition-colors hover:text-accent sm:flex', textClass)}
+          >
+            <ShoppingBag className="size-[18px]" />
+            {cartHydrated && totalCount > 0 && (
+              <span className="absolute right-0 top-0 flex size-4 items-center justify-center rounded-full bg-accent text-[9px] text-accent-foreground">
+                {totalCount}
               </span>
             )}
           </Link>
           <Link
             href="/connexion"
-            aria-label="Mon espace"
-            className={cn('hidden size-9 items-center justify-center transition-colors hover:text-primary sm:flex', textClass)}
+            aria-label="Mon compte"
+            className={cn('hidden size-9 items-center justify-center transition-colors hover:text-accent sm:flex', textClass)}
           >
             <User className="size-[18px]" />
           </Link>
           <Link
-            href="/contact"
+            href="/essayer"
             className="hidden shrink-0 whitespace-nowrap rounded-lg border border-primary bg-primary px-4 py-3 text-[11px] font-semibold uppercase tracking-wider text-primary-foreground shadow-sm transition-all hover:-translate-y-0.5 hover:bg-primary/90 hover:shadow-md xl:block"
           >
-            Contacter un conseiller
+            Essayer mon look
           </Link>
           <button
             type="button"
@@ -149,10 +164,10 @@ export function Header() {
               {item.label}
             </Link>
           ))}
-          <p className="pt-3 text-[10px] text-muted-foreground">Nos services</p>
-          {services.map((service) => (
-            <Link key={service.href} href={service.href} className="py-2 pl-3 text-xs normal-case">
-              {service.label}
+          <p className="pt-3 text-[10px] text-muted-foreground">Essayer &amp; Créer</p>
+          {experienceMenu.map((item) => (
+            <Link key={item.href} href={item.href} className="py-2 pl-3 text-xs normal-case">
+              {item.label}
             </Link>
           ))}
           <div className="mt-1 border-t border-border pt-3" />
@@ -161,9 +176,10 @@ export function Header() {
               {item.label}
             </Link>
           ))}
+          <Link href="/pres-de-moi" className="py-2.5 text-muted-foreground">Près de moi</Link>
           <Link href="/plan-du-site" className="py-2.5 text-muted-foreground">Plan du site</Link>
-          <Link href="/contact" className="mt-3 mb-2 rounded-lg bg-primary px-5 py-3.5 text-center text-primary-foreground shadow-sm">
-            Contacter un conseiller
+          <Link href="/essayer" className="mt-3 mb-2 rounded-lg bg-primary px-5 py-3.5 text-center text-primary-foreground shadow-sm">
+            Essayer mon look
           </Link>
         </nav>
       )}

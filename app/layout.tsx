@@ -5,23 +5,23 @@ import './globals.css'
 
 const sans = Inter({
   subsets: ['latin'],
-  variable: '--font-akwaba-sans',
+  variable: '--font-kosmea-sans',
   display: 'swap',
 })
 
 const serif = Playfair_Display({
   subsets: ['latin'],
-  variable: '--font-akwaba-serif',
+  variable: '--font-kosmea-serif',
   display: 'swap',
 })
 
 export const metadata: Metadata = {
   title: {
-    default: 'AKWABA IMMOBILIER — L’immobilier qui fait avancer votre vie',
-    template: '%s · AKWABA IMMOBILIER',
+    default: 'KÔSMÉA — Discover. Try. Create. Shop.',
+    template: '%s · KÔSMÉA',
   },
   description:
-    'AKWABA IMMOBILIER — plateforme immobilière premium en Côte d’Ivoire : achat, location, terrains, projets, investissement, construction et gestion immobilière.',
+    'KÔSMÉA — la première super-plateforme ivoirienne dédiée à la beauté, à la mode et au style : marketplace, essayage virtuel, stylistes, Beauty Academy et communauté.',
   generator: 'v0.app',
   icons: {
     icon: [
@@ -36,8 +36,8 @@ export const metadata: Metadata = {
 export const viewport: Viewport = {
   colorScheme: 'light dark',
   themeColor: [
-    { media: '(prefers-color-scheme: light)', color: 'white' },
-    { media: '(prefers-color-scheme: dark)', color: 'black' },
+    { media: '(prefers-color-scheme: light)', color: '#F8F3EA' },
+    { media: '(prefers-color-scheme: dark)', color: '#111111' },
   ],
 }
 

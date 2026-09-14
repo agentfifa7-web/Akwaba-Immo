@@ -6,9 +6,9 @@ export function TestimonialCard({ testimonial }: { testimonial: Testimonial }) {
   return (
     <div className="flex h-full flex-col justify-between border border-border bg-card p-7">
       <div>
-        <div className="flex gap-0.5 text-primary">
+        <div className="flex gap-0.5 text-champagne">
           {Array.from({ length: 5 }).map((_, i) => (
-            <Star key={i} className={`size-3.5 ${i < testimonial.rating ? 'fill-primary' : 'fill-none text-border'}`} />
+            <Star key={i} className={`size-3.5 ${i < testimonial.rating ? 'fill-champagne' : 'fill-none text-border'}`} />
           ))}
         </div>
         <p className="mt-5 font-serif text-lg leading-relaxed text-foreground">“{testimonial.quote}”</p>
