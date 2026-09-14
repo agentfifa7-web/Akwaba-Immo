@@ -80,6 +80,7 @@ const columns: { title: string; links: { href: string; label: string }[] }[] = [
     links: [
       { href: '/assistant', label: 'Akwaba AI — Assistant' },
       { href: '/recherche-intelligente', label: 'Recherche intelligente' },
+      { href: '/decoration', label: 'Décorateur virtuel 3D' },
     ],
   },
   {
@@ -88,6 +89,7 @@ const columns: { title: string; links: { href: string; label: string }[] }[] = [
       { href: '/connexion', label: 'Connexion' },
       { href: '/inscription', label: 'Inscription' },
       { href: '/mon-espace', label: 'Mon espace' },
+      { href: '/mon-espace/decoration', label: 'Mes projets déco' },
     ],
   },
 ]

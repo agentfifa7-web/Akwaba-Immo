@@ -7,6 +7,8 @@
 
 import { useCallback, useEffect, useState } from 'react'
 
+import type { DecorProject } from '@/lib/decor'
+
 function readStorage<T>(key: string, fallback: T): T {
   if (typeof window === 'undefined') return fallback
   try {
@@ -223,6 +225,39 @@ export function useAuth() {
   const logout = useCallback(() => setUser(null), [setUser])
 
   return { user, login, register, logout, hydrated }
+}
+
+// ---- Décorateur virtuel 3D — projets de décoration ------------------------
+
+export function useDecorProjects() {
+  const [items, setItems, hydrated] = useLocalStorageState<DecorProject[]>('akwaba_decor_projects', [])
+
+  const create = useCallback(
+    (data: Omit<DecorProject, 'id' | 'createdAt' | 'updatedAt'>) => {
+      const project: DecorProject = {
+        ...data,
+        id: `decor-${Date.now()}`,
+        createdAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString(),
+      }
+      setItems((prev) => [project, ...prev])
+      return project
+    },
+    [setItems],
+  )
+
+  const update = useCallback(
+    (id: string, patch: Partial<Omit<DecorProject, 'id' | 'createdAt'>>) => {
+      setItems((prev) => prev.map((p) => (p.id === id ? { ...p, ...patch, updatedAt: new Date().toISOString() } : p)))
+    },
+    [setItems],
+  )
+
+  const remove = useCallback((id: string) => setItems((prev) => prev.filter((p) => p.id !== id)), [setItems])
+
+  const get = useCallback((id: string) => items.find((p) => p.id === id), [items])
+
+  return { items, create, update, remove, get, hydrated }
 }
 
 // ---- Générique pour les collections du back-office ------------------------

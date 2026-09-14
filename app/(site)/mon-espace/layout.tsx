@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { usePathname, useRouter } from 'next/navigation'
 import {
   Bell,
+  Boxes,
   CalendarDays,
   FileText,
   Heart,
@@ -21,6 +22,7 @@ const navItems = [
   { href: '/mon-espace/rendez-vous', label: 'Mes rendez-vous', icon: CalendarDays },
   { href: '/mon-espace/demandes', label: 'Mes demandes', icon: MessageSquare },
   { href: '/mon-espace/documents', label: 'Mes documents', icon: FileText },
+  { href: '/mon-espace/decoration', label: 'Mes projets déco', icon: Boxes },
 ]
 
 export default function MonEspaceLayout({ children }: { children: React.ReactNode }) {

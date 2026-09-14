@@ -396,6 +396,21 @@ export default function PropertyDetailPage() {
               </div>
             </div>
 
+            {(['villa', 'maison', 'appartement'] as const).includes(property.category as never) && (
+              <Link
+                href={`/decoration?bien=${property.slug}`}
+                className="flex items-center gap-4 rounded-xl border border-border bg-graphite p-5 text-white transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lg"
+              >
+                <span className="flex size-11 shrink-0 items-center justify-center rounded-full bg-primary/20 text-primary">
+                  <Sparkles className="size-5" />
+                </span>
+                <span>
+                  <span className="block font-serif text-base leading-tight">Décorer ce bien en 3D</span>
+                  <span className="mt-1 block text-xs text-white/60">Meublez et repeignez virtuellement avant de vous projeter.</span>
+                </span>
+              </Link>
+            )}
+
             {agent && (
               <div className="rounded-xl border border-border bg-card p-6">
                 <p className="mb-4 text-xs font-semibold uppercase tracking-wider text-muted-foreground">Contact de l’annonce</p>

@@ -81,6 +81,7 @@ const columns = [
       { href: '/inscription', label: 'Inscription' },
       { href: '/mon-espace', label: 'Mon espace' },
       { href: '/assistant', label: 'Akwaba AI' },
+      { href: '/decoration', label: 'Décorateur virtuel 3D' },
       { href: '/plan-du-site', label: 'Plan du site' },
     ],
   },

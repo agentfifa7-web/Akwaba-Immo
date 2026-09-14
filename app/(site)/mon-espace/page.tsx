@@ -1,16 +1,17 @@
 'use client'
 
 import Link from 'next/link'
-import { ArrowRight, CalendarDays, FileText, Heart, MessageSquare } from 'lucide-react'
+import { ArrowRight, Boxes, CalendarDays, FileText, Heart, MessageSquare } from 'lucide-react'
 
 import { formatDate } from '@/lib/data'
-import { useAppointments, useClientDocuments, useFavorites, useRequests } from '@/lib/store'
+import { useAppointments, useClientDocuments, useDecorProjects, useFavorites, useRequests } from '@/lib/store'
 
 export default function MonEspaceDashboardPage() {
   const { ids: favoriteIds, hydrated: favHydrated } = useFavorites()
   const { items: appointments, hydrated: apptHydrated } = useAppointments()
   const { items: requests, hydrated: reqHydrated } = useRequests()
   const { items: documents, hydrated: docHydrated } = useClientDocuments()
+  const { items: decorProjects, hydrated: decorHydrated } = useDecorProjects()
 
   const nextAppointment = [...appointments]
     .filter((a) => a.status !== 'annule')
@@ -57,6 +58,17 @@ export default function MonEspaceDashboardPage() {
       value: docHydrated ? documents.length : '—',
       hint: docHydrated
         ? `${documents.filter((d) => d.status === 'disponible').length} disponible${documents.filter((d) => d.status === 'disponible').length > 1 ? 's' : ''}`
+        : '',
+    },
+    {
+      href: '/mon-espace/decoration',
+      icon: Boxes,
+      label: 'Mes projets déco',
+      value: decorHydrated ? decorProjects.length : '—',
+      hint: decorHydrated
+        ? decorProjects.length > 0
+          ? `${decorProjects.length} projet${decorProjects.length > 1 ? 's' : ''} sauvegardé${decorProjects.length > 1 ? 's' : ''}`
+          : 'Aucun projet créé'
         : '',
     },
   ]

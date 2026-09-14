@@ -23,6 +23,7 @@ const services = [
   { href: '/services/estimation', label: 'Estimation immobilière' },
   { href: '/services/conseil', label: 'Conseil & accompagnement' },
   { href: '/services/juridique', label: 'Accompagnement juridique' },
+  { href: '/decoration', label: 'Décorateur virtuel 3D' },
 ]
 
 const secondaryNav = [
