@@ -106,7 +106,7 @@ export default function EngagementsPage() {
               Découvrez comment nous les appliquons au quotidien, à travers nos équipes et nos réalisations.
             </p>
           </div>
-          <Link href="/a-propos" className="bg-primary px-8 py-5 text-xs font-semibold uppercase tracking-wider text-primary-foreground transition-colors hover:bg-primary/90">
+          <Link href="/a-propos" className="rounded-lg bg-primary px-8 py-5 text-xs font-semibold uppercase tracking-wider text-primary-foreground shadow-sm shadow-primary/20 transition-all duration-200 hover:-translate-y-0.5 hover:bg-primary/90 hover:shadow-lg hover:shadow-primary/25 active:translate-y-0">
             Découvrir Akwaba Immobilier
           </Link>
         </div>

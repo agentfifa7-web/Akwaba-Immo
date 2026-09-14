@@ -94,10 +94,10 @@ export default function InvestirPage() {
             l’opportunité d’investissement qui correspond à vos objectifs et à votre horizon de temps.
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
-            <Link href="/investir/opportunites" className="bg-primary px-6 py-4 text-xs font-semibold uppercase tracking-wider text-primary-foreground transition-colors hover:bg-primary/90">
+            <Link href="/investir/opportunites" className="rounded-lg bg-primary px-6 py-4 text-xs font-semibold uppercase tracking-wider text-primary-foreground shadow-sm shadow-primary/20 transition-all duration-200 hover:-translate-y-0.5 hover:bg-primary/90 hover:shadow-lg hover:shadow-primary/25 active:translate-y-0">
               Voir les opportunités
             </Link>
-            <Link href="/investir/simulateur" className="border border-white/30 px-6 py-4 text-xs font-semibold uppercase tracking-wider text-white transition-colors hover:border-primary hover:bg-primary">
+            <Link href="/investir/simulateur" className="rounded-lg border border-white/30 px-6 py-4 text-xs font-semibold uppercase tracking-wider text-white transition-all duration-200 hover:-translate-y-0.5 hover:border-primary hover:bg-primary hover:shadow-lg">
               Simuler mon investissement
             </Link>
           </div>
@@ -210,7 +210,7 @@ export default function InvestirPage() {
               stratégie sur mesure.
             </p>
           </div>
-          <Link href="/contact" className="bg-primary px-8 py-5 text-xs font-semibold uppercase tracking-wider text-primary-foreground transition-colors hover:bg-primary/90">
+          <Link href="/contact" className="rounded-lg bg-primary px-8 py-5 text-xs font-semibold uppercase tracking-wider text-primary-foreground shadow-sm shadow-primary/20 transition-all duration-200 hover:-translate-y-0.5 hover:bg-primary/90 hover:shadow-lg hover:shadow-primary/25 active:translate-y-0">
             Parler à un conseiller
           </Link>
         </div>

@@ -19,7 +19,7 @@ export default function VirtualTourPage() {
     return (
       <div className="flex min-h-[60vh] flex-col items-center justify-center gap-4 bg-graphite px-5 text-center text-white">
         <h1 className="font-serif text-3xl">Bien introuvable</h1>
-        <Link href="/biens" className="bg-primary px-6 py-4 text-xs font-semibold uppercase tracking-wider text-primary-foreground">
+        <Link href="/biens" className="rounded-lg bg-primary px-6 py-4 text-xs font-semibold uppercase tracking-wider text-primary-foreground shadow-sm shadow-primary/20 transition-all duration-200 hover:-translate-y-0.5 hover:bg-primary/90 hover:shadow-lg hover:shadow-primary/25 active:translate-y-0">
           Retour au catalogue
         </Link>
       </div>
@@ -116,7 +116,7 @@ export default function VirtualTourPage() {
             <p className="max-w-sm text-sm text-white/60">
               Le plan architectural détaillé de ce bien peut vous être transmis par votre conseiller.
             </p>
-            <Link href={`/biens/${property.slug}/contact`} className="mt-3 bg-primary px-6 py-3.5 text-xs font-semibold uppercase tracking-wider text-primary-foreground">
+            <Link href={`/biens/${property.slug}/contact`} className="mt-3 rounded-lg bg-primary px-6 py-3.5 text-xs font-semibold uppercase tracking-wider text-primary-foreground shadow-sm shadow-primary/20 transition-all duration-200 hover:-translate-y-0.5 hover:bg-primary/90 hover:shadow-lg hover:shadow-primary/25 active:translate-y-0">
               Demander le plan
             </Link>
           </div>
@@ -128,10 +128,10 @@ export default function VirtualTourPage() {
             <p className="font-serif text-2xl text-primary">{propertyPriceDisplay(property)}</p>
           </div>
           <div className="flex flex-wrap gap-3">
-            <Link href={`/visite/${property.slug}`} className="bg-primary px-6 py-3.5 text-xs font-semibold uppercase tracking-wider text-primary-foreground transition-colors hover:bg-primary/90">
+            <Link href={`/visite/${property.slug}`} className="rounded-lg bg-primary px-6 py-3.5 text-xs font-semibold uppercase tracking-wider text-primary-foreground shadow-sm shadow-primary/20 transition-all duration-200 hover:-translate-y-0.5 hover:bg-primary/90 hover:shadow-lg hover:shadow-primary/25 active:translate-y-0">
               Prendre rendez-vous
             </Link>
-            <Link href={`/biens/${property.slug}`} className="border border-white/30 px-6 py-3.5 text-xs font-semibold uppercase tracking-wider transition-colors hover:border-primary hover:text-primary">
+            <Link href={`/biens/${property.slug}`} className="rounded-lg border border-white/30 px-6 py-3.5 text-xs font-semibold uppercase tracking-wider transition-all duration-200 hover:-translate-y-0.5 hover:border-primary hover:text-primary hover:shadow-lg">
               Fiche complète du bien
             </Link>
           </div>

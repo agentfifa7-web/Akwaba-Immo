@@ -85,7 +85,7 @@ export default function FaqPage() {
         <div className="mt-16 border border-border bg-secondary/60 p-8 text-center">
           <p className="font-serif text-2xl">Vous ne trouvez pas de réponse ?</p>
           <p className="mt-3 text-sm leading-6 text-muted-foreground">Notre équipe est disponible pour répondre à toutes vos questions.</p>
-          <Link href="/contact" className="mt-6 inline-block bg-primary px-6 py-4 text-xs font-semibold uppercase tracking-wider text-primary-foreground transition-colors hover:bg-primary/90">
+          <Link href="/contact" className="mt-6 inline-block rounded-lg bg-primary px-6 py-4 text-xs font-semibold uppercase tracking-wider text-primary-foreground shadow-sm shadow-primary/20 transition-all duration-200 hover:-translate-y-0.5 hover:bg-primary/90 hover:shadow-lg hover:shadow-primary/25 active:translate-y-0">
             Contacter un conseiller
           </Link>
         </div>

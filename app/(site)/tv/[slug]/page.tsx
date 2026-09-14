@@ -19,7 +19,7 @@ export default function VideoPage() {
         <p className="max-w-md text-sm leading-6 text-muted-foreground">
           Cette vidéo n’existe pas ou a été déplacée. Découvrez plutôt l’ensemble d’Akwaba TV.
         </p>
-        <Link href="/tv" className="flex items-center gap-2 bg-primary px-6 py-4 text-xs font-semibold uppercase tracking-wider text-primary-foreground">
+        <Link href="/tv" className="flex items-center gap-2 rounded-lg bg-primary px-6 py-4 text-xs font-semibold uppercase tracking-wider text-primary-foreground shadow-sm shadow-primary/20 transition-all duration-200 hover:-translate-y-0.5 hover:bg-primary/90 hover:shadow-lg hover:shadow-primary/25 active:translate-y-0">
           <ArrowLeft className="size-4" /> Retour à Akwaba TV
         </Link>
       </section>

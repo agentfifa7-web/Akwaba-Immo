@@ -73,7 +73,7 @@ function RechercheIntelligenteContent() {
           />
           <button
             type="submit"
-            className="shrink-0 bg-primary px-5 py-3.5 text-xs font-semibold uppercase tracking-wider text-primary-foreground transition-colors hover:bg-primary/90"
+            className="shrink-0 rounded-lg bg-primary px-5 py-3.5 text-xs font-semibold uppercase tracking-wider text-primary-foreground shadow-sm shadow-primary/20 transition-all duration-200 hover:-translate-y-0.5 hover:bg-primary/90 hover:shadow-lg hover:shadow-primary/25 active:translate-y-0"
           >
             Rechercher
           </button>

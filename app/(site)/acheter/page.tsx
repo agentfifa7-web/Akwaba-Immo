@@ -33,7 +33,7 @@ export default function AcheterPage() {
           <p className="mt-5 max-w-xl leading-7 text-white/75">
             {forSale.length} biens à vendre vérifiés par nos équipes juridiques et foncières : terrains, villas, maisons, appartements et immeubles.
           </p>
-          <Link href="/biens?transaction=vente" className="mt-8 inline-flex items-center gap-2 bg-primary px-6 py-4 text-xs font-semibold uppercase tracking-wider text-primary-foreground transition-colors hover:bg-primary/90">
+          <Link href="/biens?transaction=vente" className="mt-8 inline-flex items-center gap-2 rounded-lg bg-primary px-6 py-4 text-xs font-semibold uppercase tracking-wider text-primary-foreground shadow-sm shadow-primary/20 transition-all duration-200 hover:-translate-y-0.5 hover:bg-primary/90 hover:shadow-lg hover:shadow-primary/25 active:translate-y-0">
             Voir tous les biens à vendre <ArrowRight className="size-4" />
           </Link>
         </div>
@@ -68,7 +68,7 @@ export default function AcheterPage() {
             <h2 className="font-serif text-4xl leading-tight sm:text-5xl">Un projet d’achat précis en tête ?</h2>
             <p className="mt-5 leading-7 text-white/70">Nos conseillers vous aident à affiner votre recherche selon votre budget et vos critères.</p>
           </div>
-          <Link href="/contact" className="bg-primary px-8 py-5 text-xs font-semibold uppercase tracking-wider text-primary-foreground transition-colors hover:bg-primary/90">
+          <Link href="/contact" className="rounded-lg bg-primary px-8 py-5 text-xs font-semibold uppercase tracking-wider text-primary-foreground shadow-sm shadow-primary/20 transition-all duration-200 hover:-translate-y-0.5 hover:bg-primary/90 hover:shadow-lg hover:shadow-primary/25 active:translate-y-0">
             Parler à un conseiller
           </Link>
         </div>

@@ -109,7 +109,7 @@ export default function AppointmentPage() {
           <p className="mt-2 max-w-sm text-xs text-muted-foreground">
             Un conseiller vous contactera pour confirmer ce rendez-vous. Vous pouvez suivre son statut depuis votre espace client.
           </p>
-          <Link href="/mon-espace/rendez-vous" className="mt-4 border border-foreground/20 px-6 py-3.5 text-xs font-semibold uppercase tracking-wider transition-colors hover:border-primary hover:text-primary">
+          <Link href="/mon-espace/rendez-vous" className="mt-4 rounded-lg border border-foreground/20 px-6 py-3.5 text-center text-xs font-semibold uppercase tracking-wider transition-all duration-200 hover:-translate-y-0.5 hover:border-primary hover:text-primary hover:shadow-sm">
             Voir mes rendez-vous
           </Link>
         </div>
@@ -169,7 +169,7 @@ export default function AppointmentPage() {
             <Input id="email" required type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="vous@exemple.com" />
           </div>
 
-          <button type="submit" disabled={!date || !time} className="mt-2 bg-primary px-6 py-4 text-xs font-semibold uppercase tracking-wider text-primary-foreground transition-colors hover:bg-primary/90 disabled:cursor-not-allowed disabled:opacity-50">
+          <button type="submit" disabled={!date || !time} className="mt-2 rounded-lg bg-primary px-6 py-4 text-xs font-semibold uppercase tracking-wider text-primary-foreground shadow-sm shadow-primary/20 transition-all duration-200 hover:-translate-y-0.5 hover:bg-primary/90 hover:shadow-lg hover:shadow-primary/25 active:translate-y-0 disabled:cursor-not-allowed disabled:opacity-50">
             Confirmer ma demande de rendez-vous
           </button>
         </form>

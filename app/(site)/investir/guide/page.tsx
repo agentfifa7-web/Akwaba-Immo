@@ -118,10 +118,10 @@ export default function GuidePage() {
             <p className="mt-5 leading-7 text-white/70">Simulez votre investissement ou parcourez nos opportunités du moment.</p>
           </div>
           <div className="flex flex-col gap-3 sm:flex-row">
-            <Link href="/investir/simulateur" className="bg-primary px-6 py-4 text-center text-xs font-semibold uppercase tracking-wider text-primary-foreground">
+            <Link href="/investir/simulateur" className="rounded-lg bg-primary px-6 py-4 text-center text-xs font-semibold uppercase tracking-wider text-primary-foreground shadow-sm shadow-primary/20 transition-all duration-200 hover:-translate-y-0.5 hover:bg-primary/90 hover:shadow-lg hover:shadow-primary/25 active:translate-y-0">
               Simuler mon investissement
             </Link>
-            <Link href="/investir/opportunites" className="border border-white/30 px-6 py-4 text-center text-xs font-semibold uppercase tracking-wider text-white">
+            <Link href="/investir/opportunites" className="rounded-lg border border-white/30 px-6 py-4 text-center text-xs font-semibold uppercase tracking-wider text-white transition-all duration-200 hover:-translate-y-0.5 hover:border-primary hover:shadow-lg">
               Voir les opportunités
             </Link>
           </div>

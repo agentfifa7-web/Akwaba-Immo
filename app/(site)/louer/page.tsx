@@ -33,7 +33,7 @@ export default function LouerPage() {
           <p className="mt-5 max-w-xl leading-7 text-white/75">
             {forRent.length} biens disponibles à la location : appartements, villas, maisons, bureaux et commerces.
           </p>
-          <Link href="/biens?transaction=location" className="mt-8 inline-flex items-center gap-2 bg-primary px-6 py-4 text-xs font-semibold uppercase tracking-wider text-primary-foreground transition-colors hover:bg-primary/90">
+          <Link href="/biens?transaction=location" className="mt-8 inline-flex items-center gap-2 rounded-lg bg-primary px-6 py-4 text-xs font-semibold uppercase tracking-wider text-primary-foreground shadow-sm shadow-primary/20 transition-all duration-200 hover:-translate-y-0.5 hover:bg-primary/90 hover:shadow-lg hover:shadow-primary/25 active:translate-y-0">
             Voir tous les biens à louer <ArrowRight className="size-4" />
           </Link>
         </div>
@@ -68,7 +68,7 @@ export default function LouerPage() {
             <h2 className="font-serif text-4xl leading-tight sm:text-5xl">Propriétaire ? Confiez-nous la gestion de votre bien.</h2>
             <p className="mt-5 leading-7 text-white/70">Recherche de locataires, état des lieux, encaissement des loyers : notre pôle gestion s’occupe de tout.</p>
           </div>
-          <Link href="/services/gestion" className="bg-primary px-8 py-5 text-xs font-semibold uppercase tracking-wider text-primary-foreground transition-colors hover:bg-primary/90">
+          <Link href="/services/gestion" className="rounded-lg bg-primary px-8 py-5 text-xs font-semibold uppercase tracking-wider text-primary-foreground shadow-sm shadow-primary/20 transition-all duration-200 hover:-translate-y-0.5 hover:bg-primary/90 hover:shadow-lg hover:shadow-primary/25 active:translate-y-0">
             Découvrir la gestion locative
           </Link>
         </div>

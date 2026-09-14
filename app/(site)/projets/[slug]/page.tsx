@@ -27,7 +27,7 @@ export default function ProjectDetailPage() {
         <p className="text-xs font-semibold uppercase tracking-[0.3em] text-primary">Erreur 404</p>
         <h1 className="font-serif text-4xl">Projet introuvable</h1>
         <p className="max-w-md text-sm text-muted-foreground">Ce programme n’existe plus ou n’est plus accessible.</p>
-        <Link href="/projets" className="mt-4 bg-primary px-6 py-4 text-xs font-semibold uppercase tracking-wider text-primary-foreground">
+        <Link href="/projets" className="mt-4 rounded-lg bg-primary px-6 py-4 text-xs font-semibold uppercase tracking-wider text-primary-foreground shadow-sm shadow-primary/20 transition-all duration-200 hover:-translate-y-0.5 hover:bg-primary/90 hover:shadow-lg hover:shadow-primary/25 active:translate-y-0">
           Retour aux projets
         </Link>
       </div>
@@ -215,18 +215,18 @@ export default function ProjectDetailPage() {
 
             <div className="flex flex-col gap-3 border border-border bg-card p-6">
               <p className="mb-1 text-xs font-semibold uppercase tracking-wider text-muted-foreground">Contact commercial</p>
-              <Link href={`/visite/${project.slug}`} className="flex items-center justify-center gap-2 bg-primary px-5 py-4 text-center text-xs font-semibold uppercase tracking-wider text-primary-foreground transition-colors hover:bg-primary/90">
+              <Link href={`/visite/${project.slug}`} className="flex items-center justify-center gap-2 rounded-lg bg-primary px-5 py-4 text-center text-xs font-semibold uppercase tracking-wider text-primary-foreground shadow-sm shadow-primary/20 transition-all duration-200 hover:-translate-y-0.5 hover:bg-primary/90 hover:shadow-lg hover:shadow-primary/25 active:translate-y-0">
                 <Calendar className="size-4" /> Prendre rendez-vous
               </Link>
               <a
                 href={`https://wa.me/2250700000000?text=${encodeURIComponent(`Bonjour, je souhaite des informations sur le programme « ${project.name} »`)}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center justify-center gap-2 bg-[#25D366] px-5 py-4 text-center text-xs font-semibold uppercase tracking-wider text-white transition-opacity hover:opacity-90"
+                className="flex items-center justify-center gap-2 rounded-lg bg-[#25D366] px-5 py-4 text-center text-xs font-semibold uppercase tracking-wider text-white shadow-sm shadow-[#25D366]/25 transition-all duration-200 hover:-translate-y-0.5 hover:opacity-95 hover:shadow-lg active:translate-y-0"
               >
                 Contacter par WhatsApp
               </a>
-              <Link href="/contact" className="flex items-center justify-center gap-2 border border-foreground/20 px-5 py-4 text-center text-xs font-semibold uppercase tracking-wider transition-colors hover:border-primary hover:text-primary">
+              <Link href="/contact" className="flex items-center justify-center gap-2 rounded-lg border border-foreground/20 px-5 py-4 text-center text-xs font-semibold uppercase tracking-wider transition-all duration-200 hover:-translate-y-0.5 hover:border-primary hover:text-primary hover:shadow-sm">
                 Parler à un conseiller
               </Link>
             </div>

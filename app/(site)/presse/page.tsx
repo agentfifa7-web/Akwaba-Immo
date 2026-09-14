@@ -81,7 +81,7 @@ export default function PressePage() {
           <button
             type="button"
             disabled
-            className="flex shrink-0 items-center gap-2 bg-graphite px-6 py-4 text-xs font-semibold uppercase tracking-wider text-graphite-foreground opacity-60"
+            className="flex shrink-0 items-center gap-2 rounded-lg bg-graphite px-6 py-4 text-xs font-semibold uppercase tracking-wider text-graphite-foreground shadow-sm shadow-black/20 transition-all duration-200 opacity-60 hover:-translate-y-0.5 hover:bg-graphite/90 hover:shadow-lg hover:shadow-black/25 active:translate-y-0"
           >
             <Download className="size-4" /> Télécharger le dossier de presse (PDF)
           </button>
@@ -136,7 +136,7 @@ export default function PressePage() {
               Inaugurations, salons professionnels, conférences : suivez notre agenda d’événements.
             </p>
           </div>
-          <Link href="/evenements" className="shrink-0 bg-primary px-7 py-4 text-xs font-semibold uppercase tracking-wider text-primary-foreground transition-colors hover:bg-primary/90">
+          <Link href="/evenements" className="shrink-0 rounded-lg bg-primary px-7 py-4 text-xs font-semibold uppercase tracking-wider text-primary-foreground shadow-sm shadow-primary/20 transition-all duration-200 hover:-translate-y-0.5 hover:bg-primary/90 hover:shadow-lg hover:shadow-primary/25 active:translate-y-0">
             Voir nos événements
           </Link>
         </div>
@@ -151,7 +151,7 @@ export default function PressePage() {
               Contactez notre service communication pour toute demande d’interview, de visuel ou d’information.
             </p>
           </div>
-          <a href="mailto:presse@akwaba-immobilier.ci" className="bg-primary px-8 py-5 text-xs font-semibold uppercase tracking-wider text-primary-foreground transition-colors hover:bg-primary/90">
+          <a href="mailto:presse@akwaba-immobilier.ci" className="rounded-lg bg-primary px-8 py-5 text-xs font-semibold uppercase tracking-wider text-primary-foreground shadow-sm shadow-primary/20 transition-all duration-200 hover:-translate-y-0.5 hover:bg-primary/90 hover:shadow-lg hover:shadow-primary/25 active:translate-y-0">
             presse@akwaba-immobilier.ci
           </a>
         </div>

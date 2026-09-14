@@ -103,7 +103,7 @@ export default function MonEspaceDashboardPage() {
         <div className="flex shrink-0 flex-wrap gap-3">
           <Link
             href="/biens"
-            className="bg-primary px-5 py-3 text-xs font-semibold uppercase tracking-wider text-primary-foreground transition-colors hover:bg-primary/90"
+            className="rounded-lg bg-primary px-5 py-3 text-xs font-semibold uppercase tracking-wider text-primary-foreground shadow-sm shadow-primary/20 transition-all duration-200 hover:-translate-y-0.5 hover:bg-primary/90 hover:shadow-lg hover:shadow-primary/25 active:translate-y-0"
           >
             Voir les biens
           </Link>

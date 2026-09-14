@@ -28,7 +28,7 @@ export default function PropertyContactPage() {
     return (
       <div className="mx-auto flex max-w-7xl flex-col items-center gap-4 px-5 py-32 text-center lg:px-10">
         <h1 className="font-serif text-4xl">Bien introuvable</h1>
-        <Link href="/biens" className="mt-4 bg-primary px-6 py-4 text-xs font-semibold uppercase tracking-wider text-primary-foreground">
+        <Link href="/biens" className="mt-4 rounded-lg bg-primary px-6 py-4 text-xs font-semibold uppercase tracking-wider text-primary-foreground shadow-sm shadow-primary/20 transition-all duration-200 hover:-translate-y-0.5 hover:bg-primary/90 hover:shadow-lg hover:shadow-primary/25 active:translate-y-0">
           Retour au catalogue
         </Link>
       </div>
@@ -78,7 +78,7 @@ export default function PropertyContactPage() {
           <p className="max-w-sm text-sm text-muted-foreground">
             Merci {name || ''}, un conseiller Akwaba Immobilier vous recontacte très prochainement au sujet de « {property.title} ».
           </p>
-          <Link href={`/biens/${property.slug}`} className="mt-4 border border-foreground/20 px-6 py-3.5 text-xs font-semibold uppercase tracking-wider transition-colors hover:border-primary hover:text-primary">
+          <Link href={`/biens/${property.slug}`} className="mt-4 rounded-lg border border-foreground/20 px-6 py-3.5 text-center text-xs font-semibold uppercase tracking-wider transition-all duration-200 hover:-translate-y-0.5 hover:border-primary hover:text-primary hover:shadow-sm">
             Retour à la fiche du bien
           </Link>
         </div>
@@ -102,7 +102,7 @@ export default function PropertyContactPage() {
             <Label htmlFor="message">Votre message</Label>
             <Textarea id="message" required rows={5} value={message} onChange={(e) => setMessage(e.target.value)} />
           </div>
-          <button type="submit" className="mt-2 bg-primary px-6 py-4 text-xs font-semibold uppercase tracking-wider text-primary-foreground transition-colors hover:bg-primary/90">
+          <button type="submit" className="mt-2 rounded-lg bg-primary px-6 py-4 text-xs font-semibold uppercase tracking-wider text-primary-foreground shadow-sm shadow-primary/20 transition-all duration-200 hover:-translate-y-0.5 hover:bg-primary/90 hover:shadow-lg hover:shadow-primary/25 active:translate-y-0">
             Envoyer ma demande
           </button>
         </form>

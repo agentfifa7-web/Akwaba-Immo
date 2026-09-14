@@ -75,7 +75,7 @@ export default function AgencesPage() {
                   href={`https://www.google.com/maps/search/?api=1&query=${agency.coordinates.lat},${agency.coordinates.lng}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-2 bg-graphite px-5 py-3 text-xs font-semibold uppercase tracking-wider text-graphite-foreground transition-colors hover:bg-graphite/90"
+                  className="flex items-center gap-2 rounded-lg bg-graphite px-5 py-3 text-xs font-semibold uppercase tracking-wider text-graphite-foreground shadow-sm shadow-black/20 transition-all duration-200 hover:-translate-y-0.5 hover:bg-graphite/90 hover:shadow-lg hover:shadow-black/25 active:translate-y-0"
                 >
                   <Navigation className="size-3.5" /> Itinéraire
                 </a>
@@ -94,7 +94,7 @@ export default function AgencesPage() {
             <h2 className="font-serif text-4xl leading-tight sm:text-5xl">Aucune agence près de chez vous ?</h2>
             <p className="mt-5 leading-7 text-white/70">Nos conseillers vous accompagnent aussi à distance, où que vous soyez.</p>
           </div>
-          <Link href="/contact" className="bg-primary px-8 py-5 text-xs font-semibold uppercase tracking-wider text-primary-foreground transition-colors hover:bg-primary/90">
+          <Link href="/contact" className="rounded-lg bg-primary px-8 py-5 text-xs font-semibold uppercase tracking-wider text-primary-foreground shadow-sm shadow-primary/20 transition-all duration-200 hover:-translate-y-0.5 hover:bg-primary/90 hover:shadow-lg hover:shadow-primary/25 active:translate-y-0">
             Nous contacter
           </Link>
         </div>

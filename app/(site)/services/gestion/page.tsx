@@ -116,7 +116,7 @@ export default function GestionPage() {
             <h2 className="font-serif text-4xl leading-tight sm:text-5xl">Un bien à faire gérer ?</h2>
             <p className="mt-5 leading-7 text-white/70">Parlons de votre bien et de vos objectifs avec notre pôle gestion locative.</p>
           </div>
-          <Link href="/contact" className="flex items-center gap-2 bg-primary px-8 py-5 text-xs font-semibold uppercase tracking-wider text-primary-foreground transition-colors hover:bg-primary/90">
+          <Link href="/contact" className="flex items-center gap-2 rounded-lg bg-primary px-8 py-5 text-xs font-semibold uppercase tracking-wider text-primary-foreground shadow-sm shadow-primary/20 transition-all duration-200 hover:-translate-y-0.5 hover:bg-primary/90 hover:shadow-lg hover:shadow-primary/25 active:translate-y-0">
             Faire gérer mon bien <ArrowRight className="size-4" />
           </Link>
         </div>

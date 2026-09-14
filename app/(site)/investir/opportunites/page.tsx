@@ -161,10 +161,10 @@ export default function OpportunitesPage() {
             <p className="mt-5 leading-7 text-white/70">Simulez votre investissement ou échangez directement avec un conseiller.</p>
           </div>
           <div className="flex flex-col gap-3 sm:flex-row">
-            <Link href="/investir/simulateur" className="flex items-center justify-center gap-2 bg-primary px-6 py-4 text-xs font-semibold uppercase tracking-wider text-primary-foreground transition-colors hover:bg-primary/90">
+            <Link href="/investir/simulateur" className="flex items-center justify-center gap-2 rounded-lg bg-primary px-6 py-4 text-xs font-semibold uppercase tracking-wider text-primary-foreground shadow-sm shadow-primary/20 transition-all duration-200 hover:-translate-y-0.5 hover:bg-primary/90 hover:shadow-lg hover:shadow-primary/25 active:translate-y-0">
               Simuler mon investissement <ArrowRight className="size-4" />
             </Link>
-            <Link href="/contact" className="flex items-center justify-center gap-2 border border-white/30 px-6 py-4 text-xs font-semibold uppercase tracking-wider text-white transition-colors hover:border-primary hover:bg-primary">
+            <Link href="/contact" className="flex items-center justify-center gap-2 rounded-lg border border-white/30 px-6 py-4 text-xs font-semibold uppercase tracking-wider text-white transition-all duration-200 hover:-translate-y-0.5 hover:border-primary hover:bg-primary hover:shadow-lg">
               Parler à un conseiller
             </Link>
           </div>
