@@ -8,7 +8,7 @@ import { formatDate, videos } from '@/lib/data'
 import { SectionHeading } from '@/components/site/section-heading'
 import { Reveal } from '@/components/site/reveal'
 import { Badge } from '@/components/ui/badge'
-import { cn } from '@/lib/utils'
+import { Tabs } from '@/components/ui/tabs'
 
 const categories = ['Toutes', ...Array.from(new Set(videos.map((v) => v.category)))]
 const sorted = [...videos].sort((a, b) => (a.date < b.date ? 1 : -1))
@@ -44,23 +44,7 @@ export default function TvPage() {
 
       <section className="border-b border-border bg-secondary/60">
         <div className="mx-auto max-w-7xl px-5 py-6 lg:px-10">
-          <div className="flex flex-wrap gap-2.5">
-            {categories.map((cat) => (
-              <button
-                key={cat}
-                type="button"
-                onClick={() => setActive(cat)}
-                className={cn(
-                  'border px-4 py-2 text-xs font-semibold uppercase tracking-wider transition-colors',
-                  active === cat
-                    ? 'border-primary bg-primary text-primary-foreground'
-                    : 'border-border bg-background text-foreground hover:border-primary hover:text-primary',
-                )}
-              >
-                {cat}
-              </button>
-            ))}
-          </div>
+          <Tabs items={categories.map((cat) => ({ value: cat, label: cat }))} value={active} onChange={setActive} size="sm" />
         </div>
       </section>
 

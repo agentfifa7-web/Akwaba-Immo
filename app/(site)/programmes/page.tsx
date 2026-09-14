@@ -5,7 +5,7 @@ import { useMemo, useState } from 'react'
 import { projects, type ProgramStatus } from '@/lib/data'
 import { ProjectCard } from '@/components/site/project-card'
 import { SectionHeading } from '@/components/site/section-heading'
-import { cn } from '@/lib/utils'
+import { Tabs } from '@/components/ui/tabs'
 
 const tabs: { value: ProgramStatus; label: string }[] = [
   { value: 'en_commercialisation', label: 'En commercialisation' },
@@ -32,22 +32,15 @@ export default function ProgrammesPage() {
       </section>
 
       <section className="mx-auto max-w-7xl px-5 py-14 lg:px-10 lg:py-20">
-        <div className="flex flex-wrap gap-2 border-b border-border pb-8">
-          {tabs.map((tab) => {
-            const count = projects.filter((p) => p.status === tab.value).length
-            return (
-              <button
-                key={tab.value}
-                onClick={() => setActive(tab.value)}
-                className={cn(
-                  'border px-5 py-3 text-xs font-semibold uppercase tracking-wider transition-colors',
-                  active === tab.value ? 'border-primary bg-primary text-primary-foreground' : 'border-border text-muted-foreground hover:border-primary hover:text-primary',
-                )}
-              >
-                {tab.label} ({count})
-              </button>
-            )
-          })}
+        <div className="border-b border-border pb-8">
+          <Tabs
+            items={tabs.map((tab) => ({
+              value: tab.value,
+              label: `${tab.label} (${projects.filter((p) => p.status === tab.value).length})`,
+            }))}
+            value={active}
+            onChange={(v) => setActive(v as ProgramStatus)}
+          />
         </div>
 
         {filtered.length === 0 ? (

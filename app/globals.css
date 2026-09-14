@@ -172,3 +172,23 @@
 .animate-akwaba-marquee {
   animation: akwaba-marquee 28s linear infinite;
 }
+
+/* Carte interactive (Leaflet) — habillage aux couleurs Akwaba */
+.leaflet-container {
+  font-family: var(--font-sans);
+  background: var(--muted);
+}
+.leaflet-popup-content-wrapper {
+  border-radius: var(--radius-lg);
+  box-shadow: 0 16px 40px rgba(20, 15, 10, 0.22);
+}
+.leaflet-popup-content {
+  margin: 14px 16px;
+}
+.leaflet-popup-tip {
+  box-shadow: 0 4px 10px rgba(20, 15, 10, 0.1);
+}
+.leaflet-control-zoom a {
+  border-radius: var(--radius-md) !important;
+  color: var(--foreground) !important;
+}

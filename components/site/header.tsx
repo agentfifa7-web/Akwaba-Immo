@@ -65,7 +65,7 @@ export function Header() {
           AKWABA <span className="text-primary">IMMOBILIER</span>
         </Link>
 
-        <nav className={cn('hidden items-center gap-6 text-xs font-medium uppercase tracking-[0.14em] lg:flex', textClass)}>
+        <nav className={cn('hidden shrink-0 items-center gap-5 whitespace-nowrap text-xs font-medium uppercase tracking-[0.12em] xl:flex', textClass)}>
           <Link href="/" className="transition-colors hover:text-primary">
             Accueil
           </Link>
@@ -75,14 +75,14 @@ export function Header() {
             </Link>
           ))}
           <div className="relative" onMouseEnter={() => setServicesOpen(true)} onMouseLeave={() => setServicesOpen(false)}>
-            <button type="button" className="flex items-center gap-1 transition-colors hover:text-primary">
+            <button type="button" className="flex items-center gap-1 whitespace-nowrap transition-colors hover:text-primary">
               Nos services <ChevronDown className="size-3" />
             </button>
             {servicesOpen && (
-              <div className="absolute left-1/2 top-full w-72 -translate-x-1/2 border border-border bg-background pt-1 normal-case tracking-normal text-foreground shadow-xl">
+              <div className="absolute left-1/2 top-full w-72 -translate-x-1/2 rounded-lg border border-border bg-background pt-1 normal-case tracking-normal text-foreground shadow-xl">
                 <div className="flex flex-col py-2">
                   {services.map((service) => (
-                    <Link key={service.href} href={service.href} className="px-5 py-2.5 text-sm hover:bg-muted hover:text-primary">
+                    <Link key={service.href} href={service.href} className="px-5 py-2.5 text-sm normal-case hover:bg-muted hover:text-primary">
                       {service.label}
                     </Link>
                   ))}
@@ -126,7 +126,7 @@ export function Header() {
           </Link>
           <Link
             href="/contact"
-            className="hidden border border-primary bg-primary px-4 py-3 text-[11px] font-semibold uppercase tracking-wider text-primary-foreground transition-colors hover:bg-primary/90 lg:block"
+            className="hidden shrink-0 whitespace-nowrap rounded-lg border border-primary bg-primary px-4 py-3 text-[11px] font-semibold uppercase tracking-wider text-primary-foreground shadow-sm transition-all hover:-translate-y-0.5 hover:bg-primary/90 hover:shadow-md xl:block"
           >
             Contacter un conseiller
           </Link>
@@ -134,7 +134,7 @@ export function Header() {
             type="button"
             aria-label={menuOpen ? 'Fermer le menu' : 'Ouvrir le menu'}
             onClick={() => setMenuOpen((v) => !v)}
-            className={cn('flex size-9 items-center justify-center border', transparent ? 'border-white/30 text-white' : 'border-border text-foreground', 'lg:hidden')}
+            className={cn('flex size-9 shrink-0 items-center justify-center rounded-lg border transition-colors', transparent ? 'border-white/30 text-white' : 'border-border text-foreground', 'xl:hidden')}
           >
             {menuOpen ? <X className="size-[18px]" /> : <MenuIcon className="size-[18px]" />}
           </button>
@@ -142,7 +142,7 @@ export function Header() {
       </div>
 
       {menuOpen && (
-        <nav className="flex max-h-[75vh] flex-col gap-0.5 overflow-y-auto border-t border-border bg-background px-5 py-4 text-sm uppercase tracking-widest text-foreground lg:hidden">
+        <nav className="flex max-h-[75vh] flex-col gap-0.5 overflow-y-auto border-t border-border bg-background px-5 py-4 text-sm uppercase tracking-widest text-foreground xl:hidden">
           <Link href="/" className="py-2.5">Accueil</Link>
           {mainNav.map((item) => (
             <Link key={item.href} href={item.href} className="py-2.5">
@@ -162,7 +162,7 @@ export function Header() {
             </Link>
           ))}
           <Link href="/plan-du-site" className="py-2.5 text-muted-foreground">Plan du site</Link>
-          <Link href="/contact" className="mt-3 mb-2 bg-primary px-5 py-3.5 text-center text-primary-foreground">
+          <Link href="/contact" className="mt-3 mb-2 rounded-lg bg-primary px-5 py-3.5 text-center text-primary-foreground shadow-sm">
             Contacter un conseiller
           </Link>
         </nav>

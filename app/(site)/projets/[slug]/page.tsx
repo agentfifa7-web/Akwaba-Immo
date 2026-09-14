@@ -6,6 +6,7 @@ import { useState } from 'react'
 import { Calendar, Check, ChevronLeft, ChevronRight, Download, Layers, MapPin } from 'lucide-react'
 
 import { formatFCFA, getProjectBySlug, type ProgramStatus } from '@/lib/data'
+import { PropertyMap } from '@/components/site/property-map'
 import { Badge } from '@/components/ui/badge'
 
 const statusLabels: Record<ProgramStatus, string> = {
@@ -147,12 +148,35 @@ export default function ProjectDetailPage() {
             )}
 
             {/* CALENDRIER */}
-            <div className="mt-12 flex items-center gap-4 border border-border bg-secondary/50 p-6">
+            <div className="mt-12 flex items-center gap-4 rounded-xl border border-border bg-secondary/50 p-6">
               <Calendar className="size-6 shrink-0 text-primary" />
               <div>
                 <p className="text-xs uppercase tracking-wider text-muted-foreground">Livraison prévisionnelle</p>
                 <p className="font-serif text-xl">{project.deliveryDate}</p>
               </div>
+            </div>
+
+            {/* LOCALISATION */}
+            <div className="mt-12">
+              <h2 className="font-serif text-2xl">Localisation</h2>
+              <PropertyMap
+                pins={[
+                  {
+                    id: project.id,
+                    lat: project.coordinates.lat,
+                    lng: project.coordinates.lng,
+                    title: project.name,
+                    subtitle: `${project.district}, ${project.city}`,
+                    price: `À partir de ${formatFCFA(project.priceFrom)}`,
+                    href: `/projets/${project.slug}`,
+                    kind: 'project',
+                    badge: 'Programme',
+                  },
+                ]}
+                height="320px"
+                zoom={14}
+                className="mt-5"
+              />
             </div>
 
             {/* DOCUMENTS */}

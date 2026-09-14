@@ -36,6 +36,7 @@ import {
   type PropertyCategory,
 } from '@/lib/data'
 import { PropertyCard } from '@/components/site/property-card'
+import { PropertyMap } from '@/components/site/property-map'
 import { SectionHeading } from '@/components/site/section-heading'
 import { Badge } from '@/components/ui/badge'
 import { cn } from '@/lib/utils'
@@ -263,24 +264,29 @@ export default function PropertyDetailPage() {
             <div id="localisation" className="mt-12 scroll-mt-28">
               <h2 className="font-serif text-2xl">Localisation</h2>
               <div className="mt-5 overflow-hidden rounded-xl border border-border">
-                <div className="relative flex h-48 items-center justify-center bg-[radial-gradient(circle_at_30%_20%,color-mix(in_oklch,var(--primary)_10%,var(--muted)),var(--muted))] bg-secondary">
-                  <div
-                    className="absolute inset-0 opacity-40"
-                    style={{
-                      backgroundImage:
-                        'linear-gradient(to right, var(--border) 1px, transparent 1px), linear-gradient(to bottom, var(--border) 1px, transparent 1px)',
-                      backgroundSize: '28px 28px',
-                    }}
-                  />
-                  <div className="relative flex size-11 items-center justify-center rounded-full bg-primary text-primary-foreground shadow-lg">
-                    <MapPin className="size-5" />
-                  </div>
-                </div>
+                <PropertyMap
+                  pins={[
+                    {
+                      id: property.id,
+                      lat: property.coordinates.lat,
+                      lng: property.coordinates.lng,
+                      title: property.title,
+                      subtitle: `${property.district}, ${property.city}`,
+                      price: propertyPriceDisplay(property),
+                      href: `/biens/${property.slug}`,
+                      kind: 'property',
+                      badge: property.transaction === 'vente' ? 'À vendre' : 'À louer',
+                    },
+                  ]}
+                  height="320px"
+                  zoom={15}
+                  className="rounded-none border-0"
+                />
                 <div className="flex flex-col justify-between gap-5 bg-card p-6 sm:flex-row sm:items-center">
                   <div>
                     <p className="font-serif text-lg">{property.address}</p>
                     <p className="mt-1 text-xs uppercase tracking-wider text-muted-foreground">
-                      Coordonnées indicatives : {property.coordinates.lat.toFixed(4)}, {property.coordinates.lng.toFixed(4)}
+                      Coordonnées : {property.coordinates.lat.toFixed(4)}, {property.coordinates.lng.toFixed(4)}
                     </p>
                   </div>
                   <Link

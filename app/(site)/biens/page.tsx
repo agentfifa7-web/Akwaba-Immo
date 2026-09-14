@@ -11,6 +11,7 @@ import { SectionHeading } from '@/components/site/section-heading'
 import { Select } from '@/components/ui/select'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
+import { Tabs } from '@/components/ui/tabs'
 import { cn } from '@/lib/utils'
 
 const categoryLabels: Record<PropertyCategory, string> = {
@@ -113,25 +114,16 @@ function BiensContent() {
             <SlidersHorizontal className="size-4" /> Filtrer les biens
           </div>
           <div className="mt-5 grid gap-5 sm:grid-cols-2 lg:grid-cols-6">
-            <div className="flex shrink-0 gap-1 self-start border border-border p-1 lg:col-span-2">
-              {(
-                [
+            <div className="self-start lg:col-span-2">
+              <Tabs
+                items={[
                   { value: 'all', label: 'Tous' },
                   { value: 'vente', label: 'Acheter' },
                   { value: 'location', label: 'Louer' },
-                ] as const
-              ).map((mode) => (
-                <button
-                  key={mode.value}
-                  onClick={() => setTransaction(mode.value)}
-                  className={cn(
-                    'flex-1 px-3 py-2.5 text-xs font-semibold uppercase tracking-wider transition-colors',
-                    transaction === mode.value ? 'bg-primary text-primary-foreground' : 'text-muted-foreground hover:text-foreground',
-                  )}
-                >
-                  {mode.label}
-                </button>
-              ))}
+                ]}
+                value={transaction}
+                onChange={(v) => setTransaction(v as typeof transaction)}
+              />
             </div>
 
             <div>
@@ -197,12 +189,12 @@ function BiensContent() {
                 </option>
               ))}
             </Select>
-            <div className="flex gap-1 border border-border p-1">
+            <div className="flex gap-1 rounded-lg border border-border bg-card p-1 shadow-sm">
               <button
                 type="button"
                 aria-label="Vue liste"
                 onClick={() => setView('liste')}
-                className={cn('flex size-8 items-center justify-center transition-colors', view === 'liste' ? 'bg-primary text-primary-foreground' : 'text-muted-foreground hover:text-foreground')}
+                className={cn('flex size-8 items-center justify-center rounded-md transition-all duration-200', view === 'liste' ? 'bg-primary text-primary-foreground shadow-sm' : 'text-muted-foreground hover:text-foreground')}
               >
                 <List className="size-4" />
               </button>
@@ -210,7 +202,7 @@ function BiensContent() {
                 type="button"
                 aria-label="Vue grille"
                 onClick={() => setView('grille')}
-                className={cn('flex size-8 items-center justify-center transition-colors', view === 'grille' ? 'bg-primary text-primary-foreground' : 'text-muted-foreground hover:text-foreground')}
+                className={cn('flex size-8 items-center justify-center rounded-md transition-all duration-200', view === 'grille' ? 'bg-primary text-primary-foreground shadow-sm' : 'text-muted-foreground hover:text-foreground')}
               >
                 <LayoutGrid className="size-4" />
               </button>
@@ -218,7 +210,7 @@ function BiensContent() {
                 type="button"
                 aria-label="Vue carte"
                 onClick={() => setView('carte')}
-                className={cn('flex size-8 items-center justify-center transition-colors', view === 'carte' ? 'bg-primary text-primary-foreground' : 'text-muted-foreground hover:text-foreground')}
+                className={cn('flex size-8 items-center justify-center rounded-md transition-all duration-200', view === 'carte' ? 'bg-primary text-primary-foreground shadow-sm' : 'text-muted-foreground hover:text-foreground')}
               >
                 <MapPin className="size-4" />
               </button>

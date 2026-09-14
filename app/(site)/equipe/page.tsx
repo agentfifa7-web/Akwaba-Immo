@@ -6,7 +6,7 @@ import { Mail, Phone } from 'lucide-react'
 import { agents, type Department } from '@/lib/data'
 import { SectionHeading } from '@/components/site/section-heading'
 import { Reveal } from '@/components/site/reveal'
-import { cn } from '@/lib/utils'
+import { Tabs } from '@/components/ui/tabs'
 
 const departmentLabels: Record<Department, string> = {
   direction: 'Direction',
@@ -52,22 +52,13 @@ export default function EquipePage() {
       <section className="mx-auto max-w-7xl px-5 py-20 lg:px-10 lg:py-28">
         <SectionHeading eyebrow="Toute l’équipe" title="Trouvez le bon interlocuteur" />
 
-        <div className="mt-10 flex flex-wrap gap-2">
-          {filters.map((f) => (
-            <button
-              key={f}
-              type="button"
-              onClick={() => setFilter(f)}
-              className={cn(
-                'border px-4 py-2.5 text-xs font-semibold uppercase tracking-wider transition-colors',
-                filter === f
-                  ? 'border-primary bg-primary text-primary-foreground'
-                  : 'border-border text-muted-foreground hover:border-primary hover:text-primary',
-              )}
-            >
-              {f === 'tous' ? 'Tous' : departmentLabels[f]}
-            </button>
-          ))}
+        <div className="mt-10">
+          <Tabs
+            items={filters.map((f) => ({ value: f, label: f === 'tous' ? 'Tous' : departmentLabels[f] }))}
+            value={filter}
+            onChange={(v) => setFilter(v as Department | 'tous')}
+            size="sm"
+          />
         </div>
 
         <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">

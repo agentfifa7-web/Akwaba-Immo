@@ -22,6 +22,7 @@ import { StatCounter } from '@/components/site/stat-counter'
 import { TestimonialCard } from '@/components/site/testimonial-card'
 import { Reveal } from '@/components/site/reveal'
 import { Badge } from '@/components/ui/badge'
+import { Tabs } from '@/components/ui/tabs'
 
 const featuredProperties = properties.filter((p) => p.featured).slice(0, 6)
 const showcaseProjects = projects.filter((p) => p.status !== 'a_venir').slice(0, 3)
@@ -62,19 +63,18 @@ export default function HomePage() {
             </div>
           </div>
 
-          <div className="mt-10 max-w-5xl bg-white p-3 shadow-2xl lg:flex lg:items-center lg:gap-3 lg:p-4">
-            <div className="flex shrink-0 gap-1 border-b border-border pb-3 lg:border-b-0 lg:border-r lg:pb-0 lg:pr-4">
-              {(['Acheter', 'Louer', 'Investir'] as const).map((mode) => (
-                <button
-                  key={mode}
-                  onClick={() => setSearchMode(mode)}
-                  className={`px-3 py-2 text-sm font-semibold transition-colors ${
-                    searchMode === mode ? 'bg-primary text-primary-foreground' : 'text-muted-foreground hover:text-foreground'
-                  }`}
-                >
-                  {mode}
-                </button>
-              ))}
+          <div className="mt-10 max-w-5xl rounded-xl bg-white p-3 shadow-2xl lg:flex lg:items-center lg:gap-3 lg:p-4">
+            <div className="shrink-0 border-b border-border pb-3 lg:border-b-0 lg:border-r lg:pb-0 lg:pr-4">
+              <Tabs
+                items={[
+                  { value: 'Acheter', label: 'Acheter' },
+                  { value: 'Louer', label: 'Louer' },
+                  { value: 'Investir', label: 'Investir' },
+                ]}
+                value={searchMode}
+                onChange={(v) => setSearchMode(v as typeof searchMode)}
+                className="border-none bg-transparent p-0 shadow-none"
+              />
             </div>
             <div className="grid flex-1 gap-3 py-3 sm:grid-cols-3 lg:py-0">
               <label className="flex flex-col gap-1 border-b border-border px-2 pb-2 text-[10px] font-semibold uppercase tracking-wider text-muted-foreground sm:border-b-0 sm:border-r sm:pb-0">
