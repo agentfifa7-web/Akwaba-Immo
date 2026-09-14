@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 import { useParams } from 'next/navigation'
-import { ArrowLeft, Facebook, Linkedin, Twitter } from 'lucide-react'
+import { ArrowLeft, Link2, Mail, MessageCircle } from 'lucide-react'
 
 import { articles, formatDate, getArticleBySlug } from '@/lib/data'
 import { Badge } from '@/components/ui/badge'
@@ -61,7 +61,7 @@ export default function ArticlePage() {
         <div className="mt-12 flex items-center gap-4 border-y border-border py-5">
           <span className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">Partager</span>
           <div className="flex gap-2">
-            {[Facebook, Twitter, Linkedin].map((Icon, i) => (
+            {[MessageCircle, Mail, Link2].map((Icon, i) => (
               <button
                 key={i}
                 type="button"
