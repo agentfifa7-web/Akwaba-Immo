@@ -155,7 +155,7 @@ export default function AdminTvPage() {
               <tr key={v.id}>
                 <Td>
                   <div className="flex items-center gap-3">
-                    <img src={v.thumbnail} alt={v.title} className="h-10 w-16 shrink-0 object-cover" />
+                    <img src={v.thumbnail} alt={v.title} className="h-10 w-16 shrink-0 rounded-lg object-cover" />
                     <span className="font-medium">{v.title}</span>
                   </div>
                 </Td>

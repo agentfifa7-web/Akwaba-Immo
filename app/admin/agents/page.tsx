@@ -177,7 +177,7 @@ export default function AdminAgentsPage() {
               <tr key={a.id}>
                 <Td>
                   <div className="flex items-center gap-3">
-                    <img src={a.photo} alt={a.name} className="size-10 shrink-0 object-cover" />
+                    <img src={a.photo} alt={a.name} className="size-10 shrink-0 rounded-full object-cover" />
                     <span className="font-medium">{a.name}</span>
                   </div>
                 </Td>

@@ -17,7 +17,7 @@ const past = sorted.filter((e) => new Date(e.date) < today).reverse()
 
 function EventCard({ event }: { event: (typeof events)[number] }) {
   return (
-    <div className="border border-border">
+    <div className="overflow-hidden rounded-xl border border-border">
       <div className="relative aspect-[16/10] overflow-hidden bg-muted">
         <img src={event.image} alt={event.title} className="h-full w-full object-cover" />
         <Badge className="absolute left-4 top-4">{event.category}</Badge>
