@@ -5,7 +5,6 @@ import Link from 'next/link'
 import { Camera, CheckCircle2, RotateCcw, Sparkles, Upload } from 'lucide-react'
 
 import { useAvatar, type PhotoMode } from '@/lib/store'
-import { mannequins } from '@/lib/mannequins'
 import { skinTones } from '@/lib/skin-tones'
 import { readFileAsDataUrl, resizeAndCompressImage } from '@/lib/image'
 import { AvatarPreview } from '@/components/site/avatar-preview'
@@ -63,7 +62,7 @@ export default function MyAvatarPage() {
       <SectionHeading
         eyebrow="My Avatar"
         title="Créez votre mannequin KÔSMÉA"
-        description="Uploadez votre propre photo tête-aux-pieds ou choisissez un mannequin KÔSMÉA. Une fois validé, il sera utilisé automatiquement pour tous vos essayages — vous n’aurez plus jamais à le recréer."
+        description="Uploadez votre propre photo tête-aux-pieds ou personnalisez une silhouette illustrée à votre teint exact. Une fois validé, votre mannequin sera utilisé automatiquement pour tous vos essayages — vous n’aurez plus jamais à le recréer."
       />
 
       <div className="mt-12 grid gap-10 lg:grid-cols-[380px_1fr]">
@@ -108,7 +107,7 @@ export default function MyAvatarPage() {
                 onClick={() => setMode('mannequin')}
                 className={cn('flex items-center gap-1.5 rounded-md px-4 py-2.5 text-xs font-semibold uppercase tracking-wider', config.photoMode === 'mannequin' ? 'bg-primary text-primary-foreground' : 'text-muted-foreground')}
               >
-                Mannequins KÔSMÉA
+                <Sparkles className="size-3.5" /> Silhouette illustrée
               </button>
             </div>
 
@@ -140,20 +139,13 @@ export default function MyAvatarPage() {
                 {uploadError && <p className="mt-2 text-xs text-destructive">{uploadError}</p>}
               </div>
             ) : (
-              <div className="mt-5 grid grid-cols-3 gap-3 sm:grid-cols-6">
-                {mannequins.map((m) => (
-                  <button
-                    key={m.id}
-                    type="button"
-                    onClick={() => update({ mannequinId: m.id, skinTone: m.skinTone })}
-                    className={cn('overflow-hidden rounded-xl border-2 text-left transition-colors', config.mannequinId === m.id ? 'border-primary' : 'border-transparent hover:border-primary/40')}
-                  >
-                    <div className="aspect-[3/4] overflow-hidden bg-muted">
-                      <img src={m.photo} alt={m.name} className="h-full w-full object-cover object-[center_22%]" />
-                    </div>
-                    <p className="px-1.5 py-1.5 text-center text-[11px] font-medium text-foreground">{m.name}</p>
-                  </button>
-                ))}
+              <div className="mt-5 border border-border bg-card p-5">
+                <p className="text-sm leading-6 text-muted-foreground">
+                  Votre silhouette s’ajuste en direct à vos choix ci-dessous : <span className="font-medium text-foreground">teint</span>,{' '}
+                  <span className="font-medium text-foreground">cheveux</span>, <span className="font-medium text-foreground">morphologie</span> et{' '}
+                  <span className="font-medium text-foreground">tenue</span>. Nous avons choisi ce rendu illustré plutôt qu’une photo de stock
+                  générique : il représente fidèlement, à chaque fois, la teinte que vous sélectionnez.
+                </p>
               </div>
             )}
           </div>
