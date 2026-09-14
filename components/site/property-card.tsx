@@ -15,7 +15,7 @@ export function PropertyCard({ property, className }: { property: Property; clas
 
   return (
     <article className={cn('group', className)}>
-      <Link href={`/biens/${property.slug}`} className="relative block aspect-[4/3] overflow-hidden bg-muted">
+      <Link href={`/biens/${property.slug}`} className="relative block aspect-[4/3] overflow-hidden rounded-xl bg-muted">
         <img
           src={property.images[0]}
           alt={property.title}
@@ -38,7 +38,7 @@ export function PropertyCard({ property, className }: { property: Property; clas
               toggle(property.id)
             }}
             className={cn(
-              'flex size-9 items-center justify-center bg-white/95 text-foreground transition-colors hover:text-primary',
+              'flex size-9 items-center justify-center rounded-full bg-white/95 text-foreground transition-colors hover:text-primary',
               fav && 'text-primary',
             )}
           >
@@ -48,7 +48,7 @@ export function PropertyCard({ property, className }: { property: Property; clas
             type="button"
             aria-label={`Partager ${property.title}`}
             onClick={(e) => e.preventDefault()}
-            className="flex size-9 items-center justify-center bg-white/95 text-foreground transition-colors hover:text-primary"
+            className="flex size-9 items-center justify-center rounded-full bg-white/95 text-foreground transition-colors hover:text-primary"
           >
             <Share2 className="size-4" />
           </button>

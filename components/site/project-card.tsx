@@ -14,7 +14,7 @@ const statusLabel: Record<Project['status'], string> = {
 export function ProjectCard({ project }: { project: Project }) {
   return (
     <Link href={`/projets/${project.slug}`} className="group block">
-      <div className="relative aspect-[16/11] overflow-hidden bg-muted">
+      <div className="relative aspect-[16/11] overflow-hidden rounded-xl bg-muted">
         <img
           src={project.images[0]}
           alt={project.name}
