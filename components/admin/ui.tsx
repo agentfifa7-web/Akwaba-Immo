@@ -62,8 +62,12 @@ export function Th({ className, children }: { className?: string; children: Reac
   )
 }
 
-export function Td({ className, children }: { className?: string; children: React.ReactNode }) {
-  return <td className={cn('border-b border-border px-3 py-3 align-middle text-sm text-foreground', className)}>{children}</td>
+export function Td({ className, children, ...props }: React.ComponentProps<'td'>) {
+  return (
+    <td className={cn('border-b border-border px-3 py-3 align-middle text-sm text-foreground', className)} {...props}>
+      {children}
+    </td>
+  )
 }
 
 export function TableShell({ children }: { children: React.ReactNode }) {
