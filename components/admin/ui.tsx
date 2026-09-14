@@ -91,6 +91,11 @@ const statusTones: Record<string, string> = {
   termine: 'bg-muted text-muted-foreground',
   // documents
   disponible: 'bg-emerald-500/10 text-emerald-600',
+  // programmes immobiliers
+  en_commercialisation: 'bg-primary/10 text-primary',
+  en_construction: 'bg-amber-500/10 text-amber-600',
+  a_venir: 'bg-muted text-muted-foreground',
+  livre: 'bg-emerald-500/10 text-emerald-600',
   // générique
   actif: 'bg-emerald-500/10 text-emerald-600',
   inactif: 'bg-muted text-muted-foreground',
@@ -106,6 +111,10 @@ const statusLabels: Record<string, string> = {
   annule: 'Annulé',
   termine: 'Terminé',
   disponible: 'Disponible',
+  en_commercialisation: 'En commercialisation',
+  en_construction: 'En construction',
+  a_venir: 'À venir',
+  livre: 'Livré',
   actif: 'Actif',
   inactif: 'Inactif',
 }
